@@ -15,14 +15,20 @@ BFT is short for Byzantine Fault Tolerant
 - CLIQUE
 - RAFT
 
-| Consensus     | Type                | Maturity            | Node number limits (min, max) | 
+| Consensus     | Type                | Maturity            | Node number limits (min, max, fault tolerance) |
 | ------------- | ------------------- | ------------------- | ----------------------------- |
-| IBFT1         | Proof of Authority  | Production-ready    | (4, 30)
-| IBFT2         | Proof of Authority  | Production-ready    | (4, 30)
-| QBFT          | Proof of Authority  | Early access        | 
-| Clique        | Proof of Authority  | Production-ready    |  ()
-| Raft          | Proof of Authority  | Production-ready    |
+| IBFT1         | Proof of Authority  | Production-ready    | (4, 30, N/3)
+| IBFT2         | Proof of Authority  | Production-ready    | (4, 30, N/3)
+| QBFT          | Proof of Authority  | Early access        | ()
+| Clique        | Proof of Authority  | Production-ready    | (3, , N/2 – 1)
+| Raft          | Proof of Authority  | Production-ready    | (3, , N-1)
 
 
 
 3. Permissioned node
+
+
+Refs:
+- https://www.kaleido.io/blockchain-blog/consensus-algorithms-poa-ibft-or-raft
+- https://arxiv.org/pdf/1809.03421.pdf
+- https://www.kaleido.io/blockchain-blog/consensus-algorithms-poa-ibft-or-raft
