@@ -15,13 +15,13 @@ BFT is short for Byzantine Fault Tolerant
 - CLIQUE
 - RAFT
 
-| Consensus     | Type                | Maturity            | Node number limits (min, max, fault tolerance) |
-| ------------- | ------------------- | ------------------- | ----------------------------- |
-| IBFT1         | Proof of Authority  | Production-ready    | (4, 30, N/3)
-| IBFT2         | Proof of Authority  | Production-ready    | (4, 30, N/3)
-| QBFT          | Proof of Authority  | Early access        | ()
-| Clique        | Proof of Authority  | Production-ready    | (3, , N/2 – 1)
-| Raft          | Proof of Authority  | Production-ready    | (3, , N/2 - 1)
+| Consensus     | Type                | Maturity            | Node number limits (min, max, max fault tolerance) | Node equality                 | Data immutability |
+| ------------- | ------------------- | ------------------- | ---------------------------------------------- | ----------------------------- | ------------ |
+| IBFT1         | Proof of Authority  | Production-ready    | (4, 30, N/3)                                   | All validator node are equal  | By signature
+| IBFT2         | Proof of Authority  | Production-ready    | (4, 30, N/3)                                   | All validator node are equal  | By signature
+| QBFT          | Proof of Authority  | Early access        | (4, unknown, N/3)                                   | All validator node are equal  | By signature
+| Clique        | Proof of Authority  | Production-ready    | (3, unknown, N/2 – 1)                               |                                   | By signature
+| Raft          | Proof of Authority  | Production-ready    | (3, unknown, N/2 - 1)                               | Assume there is a leader node, always acts honestly | No data immutablity
 
 3. Permissioned node (Privacy with private transactions)
 
