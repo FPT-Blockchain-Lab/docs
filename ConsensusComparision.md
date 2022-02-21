@@ -31,4 +31,4 @@ BFT is short for Byzantine Fault Tolerant
 Refs:
 - https://www.kaleido.io/blockchain-blog/consensus-algorithms-poa-ibft-or-raft
 - https://arxiv.org/pdf/1809.03421.pdf
-- https://www.kaleido.io/blockchain-blog/consensus-algorithms-poa-ibft-or-raft
+- https://consensys.net/docs/goquorum/en/latest/concepts/consensus/comparing-poa/
