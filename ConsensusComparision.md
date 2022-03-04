@@ -1,4 +1,4 @@
-# Quorum protocol consensus comparision
+# Quorum protocol consensus comparision report
 
 1. Available clients supported Quorum protocol
 
@@ -9,26 +9,31 @@
 
 BFT is short for Byzantine Fault Tolerant
 
-- IBFT 1.0 (Only available to GoQuorum client)
-- IBFT 2.0 (Only available to Besu client)
+- IBFT
 - QBFT
 - CLIQUE
 - RAFT
 
-| Consensus     | Type                | Maturity            | Node number limits (min, max, max fault tolerance) | Node equality                 | Data immutability |
-| ------------- | ------------------- | ------------------- | ---------------------------------------------- | ----------------------------- | ------------ |
-| IBFT1         | Proof of Authority  | Production-ready    | (4, 30, N/3)                                   | All validator node are equal  | By signature
-| IBFT2         | Proof of Authority  | Production-ready    | (4, 30, N/3)                                   | All validator node are equal  | By signature
-| QBFT          | Proof of Authority  | Early access        | (4, unknown, N/3)                                   | All validator node are equal  | By signature
-| Clique        | Proof of Authority  | Production-ready    | (3, unknown, N/2 – 1)                               |                                   | By signature
-| Raft          | Proof of Authority  | Production-ready    | (3, unknown, N/2 - 1)                               | Assume there is a leader node, always acts honestly | No data immutablity
+|                       | IBFT             | QBFT             | Raft             | Clique           
+|-----------------------|------------------|------------------|------------------|------------------
+| Type                  |                    
+| Maturity              |                    
+| Min node              |
+| Fault-tolerance       |
+| Consensus Finality    |
+| Forks                 |
+
+N is total of node in the network
+f is the number of faulty node can be tolerant
+C-A-P is the 3 guarantees in CAP (Consistence-Availability-Partition Tolerance)
 
 3. Permissioned node (Privacy with private transactions)
 
 4. Benchmark
 
-Refs:
+5. Refs:
 - https://www.kaleido.io/blockchain-blog/consensus-algorithms-poa-ibft-or-raft
 - https://arxiv.org/pdf/1809.03421.pdf
 - https://consensys.net/docs/goquorum/en/latest/concepts/consensus/comparing-poa/
 - https://besu.hyperledger.org/en/stable/HowTo/Configure/Consensus-Protocols/IBFT/
+- https://www.sciencedirect.com/science/article/pii/S209672092100021X
