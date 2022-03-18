@@ -1,4 +1,5 @@
-Genesis configuration and Hard fork study
+# Genesis configuration and Hard fork study
+----------------------------
 
 # 1. Concepts:
 
