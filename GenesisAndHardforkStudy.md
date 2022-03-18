@@ -14,50 +14,7 @@ Because there is no previous block to reference, genesis blocks are generally ha
 
 # 2. Goquorum
 
-In goquorum, we can start the genesis and define the list of hard fork in `genesis.json` file. The official document can be found in https://consensys.net/docs/goquorum/en/latest/reference/genesis/. However, it lacks of explaination for the all the config.
-
-Genesis block hash is created from list of attribute in ChainConfig. Refs to https://github.com/ConsenSys/quorum/blob/master/core/genesis.go#L293-L330
-
-```golang
-func (g *Genesis) ToBlock(db ethdb.Database) *types.Block {
-	if db == nil {
-		db = rawdb.NewMemoryDatabase()
-	}
-	statedb, _ := state.New(common.Hash{}, state.NewDatabase(db), nil)
-	for addr, account := range g.Alloc {
-		statedb.AddBalance(addr, account.Balance)
-		statedb.SetCode(addr, account.Code)
-		statedb.SetNonce(addr, account.Nonce)
-		for key, value := range account.Storage {
-			statedb.SetState(addr, key, value)
-		}
-	}
-	root := statedb.IntermediateRoot(false)
-	head := &types.Header{
-		Number:     new(big.Int).SetUint64(g.Number),
-		Nonce:      types.EncodeNonce(g.Nonce),
-		Time:       g.Timestamp,
-		ParentHash: g.ParentHash,
-		Extra:      g.ExtraData,
-		GasLimit:   g.GasLimit,
-		GasUsed:    g.GasUsed,
-		Difficulty: g.Difficulty,
-		MixDigest:  g.Mixhash,
-		Coinbase:   g.Coinbase,
-		Root:       root,
-	}
-	if g.GasLimit == 0 {
-		head.GasLimit = params.GenesisGasLimit
-	}
-	if g.Difficulty == nil {
-		head.Difficulty = params.GenesisDifficulty
-	}
-	statedb.Commit(false)
-	statedb.Database().TrieDB().Commit(root, true, nil)
-
-	return types.NewBlock(head, nil, nil, nil, trie.NewStackTrie(nil))
-}
-```
+In goquorum, we can start the genesis and define the list of hard fork in `genesis.json` file. The official document can be found in https://consensys.net/docs/goquorum/en/latest/reference/genesis/. However, it lacks of explaination for the all the config, so we must locking into the source code of goquorum for better understanding.
 
 For the milestone blocks (where/when the hardforks happen), we will have a deeper understanding of what the config for as explained in the source code below
 
@@ -126,6 +83,50 @@ type CliqueConfig struct {
 	Period                 uint64 `json:"period"`                 // Number of seconds between blocks to enforce
 	Epoch                  uint64 `json:"epoch"`                  // Epoch length to reset votes and checkpoint
 	AllowedFutureBlockTime uint64 `json:"allowedFutureBlockTime"` // Max time (in seconds) from current time allowed for blocks, before they're considered future blocks
+}
+```
+
+
+Genesis block hash is created from list of attribute in ChainConfig. Refs to https://github.com/ConsenSys/quorum/blob/master/core/genesis.go#L293-L330
+
+```golang
+func (g *Genesis) ToBlock(db ethdb.Database) *types.Block {
+	if db == nil {
+		db = rawdb.NewMemoryDatabase()
+	}
+	statedb, _ := state.New(common.Hash{}, state.NewDatabase(db), nil)
+	for addr, account := range g.Alloc {
+		statedb.AddBalance(addr, account.Balance)
+		statedb.SetCode(addr, account.Code)
+		statedb.SetNonce(addr, account.Nonce)
+		for key, value := range account.Storage {
+			statedb.SetState(addr, key, value)
+		}
+	}
+	root := statedb.IntermediateRoot(false)
+	head := &types.Header{
+		Number:     new(big.Int).SetUint64(g.Number),
+		Nonce:      types.EncodeNonce(g.Nonce),
+		Time:       g.Timestamp,
+		ParentHash: g.ParentHash,
+		Extra:      g.ExtraData,
+		GasLimit:   g.GasLimit,
+		GasUsed:    g.GasUsed,
+		Difficulty: g.Difficulty,
+		MixDigest:  g.Mixhash,
+		Coinbase:   g.Coinbase,
+		Root:       root,
+	}
+	if g.GasLimit == 0 {
+		head.GasLimit = params.GenesisGasLimit
+	}
+	if g.Difficulty == nil {
+		head.Difficulty = params.GenesisDifficulty
+	}
+	statedb.Commit(false)
+	statedb.Database().TrieDB().Commit(root, true, nil)
+
+	return types.NewBlock(head, nil, nil, nil, trie.NewStackTrie(nil))
 }
 ```
 # 3. Tested genesis file changes
