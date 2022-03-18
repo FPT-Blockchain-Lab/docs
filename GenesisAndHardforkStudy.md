@@ -14,9 +14,9 @@ Because there is no previous block to reference, genesis blocks are generally ha
 
 # 2. Goquorum
 
-In goquorum, we can start the genesis and define the list of hard fork in `genesis.json` file. The official document can be found in https://consensys.net/docs/goquorum/en/latest/reference/genesis/. However, it lacks of explaination for the all the config, so we must locking into the source code of goquorum for better understanding.
+In goquorum, we can start the genesis and define the list of hard fork in `genesis.json` file. The official document can be found in https://consensys.net/docs/goquorum/en/latest/reference/genesis/. However, it lacks of explaination for the all the config, so we must look into the source code of goquorum for better understanding.
 
-For the milestone blocks (where/when the hardforks happen), we will have a deeper understanding of what the config for as explained in the source code below
+For the milestone blocks (where/when the hardforks happen, with suffix `Block`), we will have a deeper understanding of what the config for as explained in the source code below
 
 ```golang
 // ChainConfig is the core config which determines the blockchain settings.
