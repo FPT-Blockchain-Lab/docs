@@ -75,7 +75,7 @@ type ChainConfig struct {
 }
 ```
 
-For the consensus engines, we only forcus on Clique field, as it is the 
+For the consensus engines, we only forcus on Clique field, because we will build our testnet with clique
 
 ```golang
 // CliqueConfig is the consensus engine configs for proof-of-authority based sealing.
@@ -140,3 +140,29 @@ Please refers to https://github.com/FPT-Blockchain-Lab/quorum-examples/blob/hard
 |Blocktime                              |Failed      |Remove the magnitude of change in blocktime (currently 3->1)  |
 |Blocksize (gas limit) change           |Pending     |Not predefined hardfork contains this                         |
    
+# 4. Management Clique sealers (blockproducer/validator)
+
+All clique sealer management is using clique RPC namespace: `clique_`. Refs to https://geth.ethereum.org/docs/rpc/ns-clique#clique_propose
+
+1. First propose an address is becoming a sealer or remove from a sealer we'll use `clique_propose`. With auth is true as propose a new sealer and false as propose kickout existing sealer
+
+	```
+	Client	Method invocation
+	Console	clique.propose(address, auth)
+	RPC	{"method": "clique_propose", "params": [address, auth]}
+	```
+2. Then, all existing sealer will list the pending proposals (not reach 50% + 1 existing sealers) and decide which keep voting for/or against the new sealer with `clique_propose`
+
+	```
+	Client	Method invocation
+	Console	clique.proposals()
+	RPC	{"method": "clique_proposals", "params": []}
+	```
+
+In quorum-kubernetes on devnet, we use:
+
+```bash
+kubectl exec -it quorum-validator-1-0 -n quorum -- geth --exec 'clique.propose("0x2932b7a2355d6fecc4b5c0b6bd44cc31df247a2e", true)' attach
+kubectl exec -it quorum-validator-2-0 -n quorum -- geth --exec 'clique.propose("0x2932b7a2355d6fecc4b5c0b6bd44cc31df247a2e", true)' attach
+...
+```
