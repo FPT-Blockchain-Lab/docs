@@ -5,69 +5,61 @@
 </p>
 
 Về mặt tổng quan, thì hệ thống các smart contract sẽ được chia thành 2 groups phục vụ cho những layer riêng biệt:
-- Permission layer sẽ có các smart contracts được define sẵn nhằm phục vụ cho việc Node Service Management
-- LC Application layer sẽ có các smart contracts được define nhằm phục vụ cho LC Platform
+- Permission Layer sẽ có các smart contracts được cung cấp nhằm phục vụ cho việc Nodes/Accounts Service Management
+- LC Application Layer sẽ có các smart contracts được tạo ra nhằm phục vụ cho các hợp đồng LC
 
-Lý do:
-- Node Service sẽ hoàn toàn độc lập với LC Account Service
-    - Node Service: Fullnode/RPC client để sync-up data và gửi transaction request
-        - Ví dụ: Ngân hàng A sẽ có Node Service A1, A2, A3; FPT Platform có Node Service F1, F2, F3, F4
-    - Account Service: những account/address sẽ tương tác với LC Platform smart contracts
-        - Ví dụ: Doanh Nghiệp D - Account Service D1 và Ngân hàng A - Account Service A1, A2, A3 (đồng thời là Node Service)
-- Doanh nghiệp/Ngân hàng hoàn toàn có thể có những Account Service mà không cần phải đăng ký Node Service
-- Smart contracts ở LC Application Layer hoàn toàn không bị phụ thuộc vào Genesis contracts ở Permission Layer
+- Theo dự định ban đầu, Permission Layer và LC Application Layer sẽ được tách riêng để dễ dàng cho việc scalability và cung cấp thêm những features khác mà không ảnh hưởng đến Permission Layer
+  - Node Service: Fullnode/RPC client để sync-up data và gửi transaction request
+    - Ví dụ: Ngân hàng A sẽ có Node Service A1, A2, A3; FPT Platform có Node Service F1, F2, F3, F4
+  - Account Service: những account/address sẽ tương tác với LC Platform smart contracts
+    - Ví dụ: Doanh Nghiệp D - Account Service D1 và Ngân hàng A - Account Service A1, A2, A3 (đồng thời là Node Service)
+  - Doanh nghiệp/Ngân hàng hoàn toàn có thể có những Account Service mà không cần phải đăng ký Node Service
+  - Smart contracts ở LC Application Layer hoàn toàn không bị phụ thuộc vào Genesis contracts ở Permission Layer
 
+- Tuy nhiên, dựa theo cơ chế quản lý của Quorum thì tất cả các accounts/nodes đều cần được đăng ký và quản lý bởi Admin của hệ thống để có thể thực hiện những tác vụ trong hệ thống blockchain (event listener, send/receive txs, deploy contracts). Nếu dùng cách thiết kế như dự định ban đầu sẽ dẫn đến tình trạng duplicate settings/tasks không thật sự cần thiết. Do đó, ở thời điểm hiện tại có thể sử dụng Permission Layer cho việc quản lý nodes/accounts cho cả hai layers mà không cần tách riêng. Nếu như nhu cầu trong tương lai đòi hỏi những yêu cầu khác thì có thể cân nhắc việc thêm extension contracts 
+    
 ## LC Platform
 
 <p align="center">
-  <img width="800" height="600" src="./images/LCPlatform.png">
+  <img width="700" height="600" src="./images/LCPlatform.png">
 </p>
 
-- LC Platform (smart contracts) được chia ra thành 3 modules chính:
-    - Platform Core: cung cấp những chức năng như Quản lý (management) và Dịch vụ (Utils/Services)
-    - Banking Core: cung cấp những chức năng cho các tổ chức ngân hàng tự quản lý/phân cấp các accounts thuộc tổ chức
-    - Contracts: các hợp đồng giữa các bên liên quan Cá Nhân/Doanh Nghiệp - Cá Nhân/Doanh Nghiệp - Ngân hàng
+- LC Platform (smart contracts) được chia ra thành 2 modules chính:
+    - LC Platform Core: cung cấp những chức năng như Quản lý (management) và Dịch vụ (Utils/Services). Module này bao gồm:
+      - Permission Management: là các smart contracts kế thừa từ Quorum cho việc quản lý (management)
+      - Service: i.e. `Router Service`, `LC Factory` và `UPAS LC Factory`
+    - LC Contracts: 
+      - Là hệ thống tập họp các hợp đồng giữa các bên liên quan Cá Nhân/Doanh Nghiệp - Cá Nhân/Doanh Nghiệp - Ngân hàng
+      - Được tạo ra bởi `LC Factory` hoặc `UPAS LC Factory`
 
-### Platform Core
+### LC Platform Core
 
-- Platform Core bao gồm 5 contract:
-  - FPT Core: quản lý những special roles trong LC Platform
-    - Hiện tại sẽ có 3 roles chính: ADMIN, BANKING và CORPORATION
-      - ADMIN: 
-        - Sẽ có quyền add thêm accounts và assign các role khác nhau cho những account này
-        - Cho phép có nhiều account được assign ADMIN role
+- LC Platform Core bao gồm các contract sau:
+  - Permission Management: quản lý toàn bộ tổ chức và special roles trong LC Platform (kế thừa từ Quorum)
+    - Hiện tại sẽ có 3 loại tổ chức: NETWORK_ADMIN (FPT), BANKING và CORPORATION
+      - NETWORK_ADMIN: giữ nhiệm vụ quản lý toàn bộ hệ thống 
+        - Có quyền thêm hoặc loại bỏ tổ chức (organization)
+        - Có quyền assign `ADMIN_ROLE` cho một tổ chức
+        - Có quyền add thêm Node Service
+        - Có quyền add/remove blacklist
       - BANKING: 
-        - Là contract address được deploy thông qua `Banking Factory`
-        - Mỗi Ngân hàng sẽ có một `Bank Core` contract của riêng mình để quản lý các account thuộc hệ thống của ngân hàng đó
-        - Các `LC Contract` hoặc `UPAS LC Contract` sẽ có những restriction với BANKING role ở các `stage` của hợp đồng
+        - Là một loại tổ chức trong hệ thống
+        - Được tạo ra bởi `NETWORK_ADMIN`
+        - Mỗi Ngân hàng sẽ có một tổ chức của riêng mình để quản lý các account thuộc hệ thống của ngân hàng đó
+        - Mỗi tổ chức ngân hàng sẽ được cho phép một hoặc nhiều `ADMIN_ROLE` để quản lý tổ chức
+        - `ADMIN_ROLE` có quyền thêm `Sub Org` và special roles trong hệ thống tổ chức đang quản lý
       - CORPORATION:
-        - Mỗi doanh nghiệp sẽ cần đăng ký một account ở Platform
-        - Sau đó, account này sẽ được register bởi ADMIN của FPT Core và assign cho special role
-        - Mỗi doanh nghiệp có thể có nhiều hơn một account (TBA)
-        - CORPORATION role được quyền khởi tạo `LC Contract` hoặc `UPAS LC Contract`
-  - Banking Factory:
-    - Là contract phục vụ cho việc khởi tạo các `Bank Core` contract
-    - Việc deploy các contract `Bank Core` sẽ được thực hiện bởi ADMIN của FPT Core.
-    - Mỗi tổ chức Ngân hàng khi tham dự vào LC Platform sẽ có một contract `Bank Core` của riêng tổ chức
-    - Do chưa xác định việc sử dụng Factory pattern có khả thi trên phiên bản hiện tại. Nên hướng design này có thể thay đổi. Có thể viết deploy script và build deploy tool để hỗ trợ việc deploy các contract như Factory
+        - Là một loại tổ chức trong hệ thống
+        - Mỗi doanh nghiệp sẽ cần đăng ký ít nhất một account
+        - `NETWORK_ADMIN` add thêm tổ chức và đồng thời assign role cho account
   - LC Factory:
     - Là contract phục vụ cho việc khởi tạo các hợp đồng nội địa `LC Contract`
-    - CORPORATION role sẽ có quyền gọi `LC Factory` để deploy `LC Contract` cho hợp đồng của cá nhân/doanh nghiệp
-    - Cũng như `Banking Factory`, hướng design pattern này có thể sẽ được thay đổi
   - UPAS LC Factory:
     - Là contract phục vụ cho việc khởi tạo các hợp đồng `UPAS LC Contract`
-    - CORPORATION role sẽ có quyền gọi `UPAS LC Factory` để deploy `UPAS LC Contract` cho hợp đồng của cá nhân/doanh nghiệp
-    - Cũng như `Banking Factory`, hướng design pattern này có thể sẽ được thay đổi
   - Router Service:
     - Cung cấp các methods để Ngân hàng, Cá nhân/Doanh nghiệp (được cấp role) có thể tương tác với các hợp đồng `LC Contract` hoặc `UPAS LC Contract`
-- Bank Core:
-  - Mỗi Ngân hàng sẽ có một `Bank Core` contract của riêng mình để quản lý các account thuộc hệ thống của ngân hàng đó
-  - `Bank Core` contract sẽ được deploy bởi ADMIN của `FPT Core`. Sau khi deploy, thì contract sẽ được register vào whitelist với định danh (role) là `BANKING`
-  - `Bank Core` contract sẽ cung cấp các chức năng quản lý accounts cũng như cấp bậc định danh được quản lý bởi tổ chức Ngân hàng đó
-  - Sẽ có ADMIN trong `Bank Core` và chức danh này là hoàn toàn độc lập với ADMIN ở `FPT Core`. Nói một cách khác là ADMIN ở `FPT Core` sẽ không có bất kỳ vai trò nào trong việc quản lý ở `Bank Core` contract. Và những `Bank Core` contract khác nhau là hoàn toàn độc lập với nhau trong việc quản lý những account của tổ chức đó
 - LC Contract / UPAS LC Contract:
   - Là các hợp đồng giao dịch giữa các bên liên quan Cá nhân/Doanh Nghiệp - Cá nhân/Doanh Nghiệp - Ngân hàng
-  - Được tạo ra bởi Cá nhân/Doanh nghiệp (CORPORATION role)
   - Mỗi hợp đồng sẽ có các `stage` quy định khác nhau. Một hợp đồng sẽ có các điểm sau:
     - Nội dung của hợp đồng và các chứng từ liên quan sẽ được cung cấp giao thức để truy xuất
     - Nội dung sẽ được lưu off-chain nhưng tính chất consistent và unalterable sẽ được bảo đảm
