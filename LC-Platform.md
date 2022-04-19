@@ -4,7 +4,7 @@
   <img width="550" height="400" src="./images/GeneralArchitecture.png">
 </p>
 
-Về mặt tổng quan, thì hệ thống các smart contract sẽ được chia thành 2 groups phục vụ cho những layer riêng biệt:
+Về mặt quản lý và kiến trúc tổng quan, thì hệ thống các smart contract sẽ được chia thành 2 groups phục vụ cho những layer riêng biệt:
 - Permission Layer sẽ có các smart contracts được cung cấp nhằm phục vụ cho việc Nodes/Accounts Service Management
 - LC Application Layer sẽ có các smart contracts được tạo ra nhằm phục vụ cho các hợp đồng LC
 
@@ -16,7 +16,7 @@ Về mặt tổng quan, thì hệ thống các smart contract sẽ được chia
   - Doanh nghiệp/Ngân hàng hoàn toàn có thể có những Account Service mà không cần phải đăng ký Node Service
   - Smart contracts ở LC Application Layer hoàn toàn không bị phụ thuộc vào Genesis contracts ở Permission Layer
 
-- Tuy nhiên, dựa theo cơ chế quản lý của Quorum thì tất cả các accounts/nodes đều cần được đăng ký và quản lý bởi Admin của hệ thống để có thể thực hiện những tác vụ trong hệ thống blockchain (event listener, send/receive txs, deploy contracts). Nếu dùng cách thiết kế như dự định ban đầu sẽ dẫn đến tình trạng duplicate settings/tasks không thật sự cần thiết. Do đó, ở thời điểm hiện tại có thể sử dụng Permission Layer cho việc quản lý nodes/accounts cho cả hai layers mà không cần tách riêng. Nếu như nhu cầu trong tương lai đòi hỏi những yêu cầu khác thì có thể cân nhắc việc thêm extension contracts 
+- Tuy nhiên, dựa theo cơ chế quản lý của Quorum thì tất cả các accounts/nodes đều cần được đăng ký và quản lý bởi Admin của hệ thống để có thể thực hiện những tác vụ trong hệ thống blockchain (event listener, send/receive txs, deploy contracts). Nếu dùng cách thiết kế như dự định ban đầu sẽ dẫn đến tình trạng duplicate settings/tasks không thật sự cần thiết. Do đó, ở thời điểm hiện tại có thể sử dụng Permission Layer cho việc quản lý nodes/accounts cho cả hai mà không cần tách riêng. Nếu như nhu cầu trong tương lai đòi hỏi những yêu cầu khác thì có thể cân nhắc việc thêm extension contracts 
     
 ## LC Platform
 
@@ -27,7 +27,7 @@ Về mặt tổng quan, thì hệ thống các smart contract sẽ được chia
 - LC Platform (smart contracts) được chia ra thành 2 modules chính:
     - LC Platform Core: cung cấp những chức năng như Quản lý (management) và Dịch vụ (Utils/Services). Module này bao gồm:
       - Permission Management: là các smart contracts kế thừa từ Quorum cho việc quản lý (management)
-      - Service: i.e. `Router Service`, `LC Factory` và `UPAS LC Factory`
+      - Service: `Router Service`, `Precondition`, `LC Factory` và `UPAS LC Factory`
     - LC Contracts: 
       - Là hệ thống tập họp các hợp đồng giữa các bên liên quan Cá Nhân/Doanh Nghiệp - Cá Nhân/Doanh Nghiệp - Ngân hàng
       - Được tạo ra bởi `LC Factory` hoặc `UPAS LC Factory`
@@ -36,7 +36,7 @@ Về mặt tổng quan, thì hệ thống các smart contract sẽ được chia
 
 - LC Platform Core bao gồm các contract sau:
   - Permission Management: quản lý toàn bộ tổ chức và special roles trong LC Platform (kế thừa từ Quorum)
-    - Hiện tại sẽ có 3 loại tổ chức: NETWORK_ADMIN (FPT), BANKING và CORPORATION
+    - Hiện tại sẽ có 3 loại tổ chức: NETWORK_ADMIN, BANKING và CORPORATION
       - NETWORK_ADMIN: giữ nhiệm vụ quản lý toàn bộ hệ thống 
         - Có quyền thêm hoặc loại bỏ tổ chức (organization)
         - Có quyền assign `ADMIN_ROLE` cho một tổ chức
@@ -52,10 +52,19 @@ Về mặt tổng quan, thì hệ thống các smart contract sẽ được chia
         - Là một loại tổ chức trong hệ thống
         - Mỗi doanh nghiệp sẽ cần đăng ký ít nhất một account
         - `NETWORK_ADMIN` add thêm tổ chức và đồng thời assign role cho account
+  - Precondition:
+    - Là contract lưu lại thông tin và chữ ký xác nhận của các hợp đồng mua bán giữa Cá nhân/Doanh nghiệp - Cá nhân/Doanh nghiệp
+    - Là một bước đệm trước khi một hợp đồng chính thức được chấp thuận và đưa vào LC bởi một tổ chức Ngân hàng
+    - Cá nhân/Doanh nghiệp sẽ cung cấp và đưa thông tin của hợp đồng lên `Precondition` contract và đợi được sự xác nhận, chấp thuận từ các tổ chức Ngân hàng
   - LC Factory:
     - Là contract phục vụ cho việc khởi tạo các hợp đồng nội địa `LC Contract`
+    - Sau khi chấp thuận cho một hợp đồng với thông tin được lưu ở `Precondition` contract, tổ chức Ngân hàng sẽ tạo `LC Contract` để lưu thông tin và quá trình ở các bước tiếp theo
   - UPAS LC Factory:
     - Là contract phục vụ cho việc khởi tạo các hợp đồng `UPAS LC Contract`
+    - Tương tự như `LC Contract`, tổ chức Ngân hàng cũng sẽ là đối tượng sẽ tạo ra `UPAS LC Contract`
+    - `UPAS LC Contract` sẽ có khác biệt với `LC Contract`:
+      - Có sự tham gia của Ngân hàng tài trợ
+      - Quá trình, thủ tục sẽ có thêm những bước liên quan đến Ngân hàng tài trợ
   - Router Service:
     - Cung cấp các methods để Ngân hàng, Cá nhân/Doanh nghiệp (được cấp role) có thể tương tác với các hợp đồng `LC Contract` hoặc `UPAS LC Contract`
 - LC Contract / UPAS LC Contract:
