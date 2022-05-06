@@ -21,15 +21,15 @@ Về mặt quản lý và kiến trúc tổng quan, thì hệ thống các smart
 ## LC Platform
 
 <p align="center">
-  <img width="700" height="600" src="./images/LCPlatform.png">
+  <img width="1000" height="600" src="./images/LCPlatform.png">
 </p>
 
 - LC Platform (smart contracts) được chia ra thành 2 modules chính:
     - LC Platform Core: cung cấp những chức năng như Quản lý (management) và Dịch vụ (Utils/Services). Module này bao gồm:
       - Permission Management: là các smart contracts kế thừa từ Quorum cho việc quản lý (management)
-      - Service: `Router Service`, `Precondition`, `LC Factory` và `UPAS LC Factory`
+      - Service: `Router Service`, `LC Factory` và `UPAS LC Factory`
     - LC Contracts: 
-      - Là hệ thống tập họp các hợp đồng giữa các bên liên quan Cá Nhân/Doanh Nghiệp - Cá Nhân/Doanh Nghiệp - Ngân hàng
+      - Là hệ thống tập họp các hợp đồng LC (Standard LC và UPAS LC) của các bên liên quan Cá Nhân/Doanh Nghiệp - Cá Nhân/Doanh Nghiệp - Ngân hàng
       - Được tạo ra bởi `LC Factory` hoặc `UPAS LC Factory`
 
 ### LC Platform Core
@@ -52,27 +52,119 @@ Về mặt quản lý và kiến trúc tổng quan, thì hệ thống các smart
         - Là một loại tổ chức trong hệ thống
         - Mỗi doanh nghiệp sẽ cần đăng ký ít nhất một account
         - `NETWORK_ADMIN` add thêm tổ chức và đồng thời assign role cho account
-  - Precondition:
-    - Là contract lưu lại thông tin và chữ ký xác nhận của các hợp đồng mua bán giữa Cá nhân/Doanh nghiệp - Cá nhân/Doanh nghiệp
-    - Là một bước đệm trước khi một hợp đồng chính thức được chấp thuận và đưa vào LC bởi một tổ chức Ngân hàng
-    - Cá nhân/Doanh nghiệp sẽ cung cấp và đưa thông tin của hợp đồng lên `Precondition` contract và đợi được sự xác nhận, chấp thuận từ các tổ chức Ngân hàng
   - LC Factory:
-    - Là contract phục vụ cho việc khởi tạo các hợp đồng nội địa `LC Contract`
-    - Sau khi chấp thuận cho một hợp đồng với thông tin được lưu ở `Precondition` contract, tổ chức Ngân hàng sẽ tạo `LC Contract` để lưu thông tin và quá trình ở các bước tiếp theo
+    - Là contract phục vụ cho việc khởi tạo các `Standard LC Contract`
+    - Có giới hạn ai là người được khởi tạo `Standard LC Contract`
   - UPAS LC Factory:
-    - Là contract phục vụ cho việc khởi tạo các hợp đồng `UPAS LC Contract`
-    - Tương tự như `LC Contract`, tổ chức Ngân hàng cũng sẽ là đối tượng sẽ tạo ra `UPAS LC Contract`
-    - `UPAS LC Contract` sẽ có khác biệt với `LC Contract`:
-      - Có sự tham gia của Ngân hàng tài trợ
+    - Là contract phục vụ cho việc khởi tạo các `UPAS LC Contract`
+    - Tương tự như `Standard LC Contract`, `UPAS LC Contract` sẽ giới hạn ai sẽ được quyền khởi tạo
+    - `UPAS LC Contract` sẽ có khác biệt với `Standard LC Contract`:
+      - Có sự tham gia của Ngân hàng tài trợ (`Reimbursing Bank`)
       - Quá trình, thủ tục sẽ có thêm những bước liên quan đến Ngân hàng tài trợ
   - Router Service:
-    - Cung cấp các methods để Ngân hàng, Cá nhân/Doanh nghiệp (được cấp role) có thể tương tác với các hợp đồng `LC Contract` hoặc `UPAS LC Contract`
-- LC Contract / UPAS LC Contract:
+    - Cung cấp các giao thức để Ngân hàng, Cá nhân/Doanh nghiệp (được cấp role) có thể tương tác với các hợp đồng `Standard LC Contract` hoặc `UPAS LC Contract`
+
+### LC Contracts
+- Standard LC Contract / UPAS LC Contract:
   - Là các hợp đồng giao dịch giữa các bên liên quan Cá nhân/Doanh Nghiệp - Cá nhân/Doanh Nghiệp - Ngân hàng
+  - LC Contract khi khởi tạo cần phải thiết lập các thông tin organizations có liên quan trong LC này
   - Mỗi hợp đồng sẽ có các `stage` quy định khác nhau. Một hợp đồng sẽ có các điểm sau:
     - Nội dung của hợp đồng và các chứng từ liên quan sẽ được cung cấp giao thức để truy xuất
-    - Nội dung sẽ được lưu off-chain nhưng tính chất consistent và unalterable sẽ được bảo đảm
+    - Nội dung sẽ được lưu off-chain nhưng tính chất consistent, integrity và unalterable sẽ được bảo đảm
     - Các bên tham gia đồng ý với các điều khoản, thông tin trong hợp đồng
-    - Khi có bất kỳ thay đổi -> `LC Contract`/`UPAS LC Contract` cần phải deploy lại và các bên cần phải verify lại
+    - Khi có bất kỳ thay đổi -> `Standard LC Contract`/`UPAS LC Contract` cần phải khởi tạo lại và các quá trình xác nhận cần thực hiện lại từ đầu
     - Hợp đồng thành công và hoàn thành khi tất cả các `stage` trong hợp đồng được `approved`
     - Hợp đồng cần được hoàn thành đúng thời hạn (TBA)
+
+## Stages and Integrity
+
+<p align="center">
+  <img width="1200" height="350" src="./images/Standard_LC_Stages.png">
+</p>
+
+<p align="center">
+  <img width="1200" height="300" src="./images/UPAS_LC_Stages.png">
+</p>
+
+Hiện tại, có 2 loại LC - `Standard LC Contract` và `UPAS LC Contract`
+- `Standard LC Contract` sẽ không có NHTT (Reimbursing Bank) và chỉ có 6 stages
+- `UPAS LC Contract` sẽ có thêm NHTT và có tổng cộng là 7 stages
+- Stage 1 sẽ chỉ có một sub-stage duy nhất (1.1)
+- Đối với Stage 2-6/2-7 thì sẽ không giới hạn số lượng sub-stage. Nghĩa là việc cung cấp bộ chứng từ và đưa `hash(content)` lên on-chain sẽ không giới hạn số lần. 
+- Có một điều kiện: cần tuân theo trình tự
+  - Stage 3.1 cần phải theo sau 2.1. 
+  - Không cho phép 2.1 <- 4.1
+  - Không cho phép 2.1 <- 3.2
+  - Không cho phép 2.2 có trước 2.1
+
+### Stages là gì?
+
+- Đối với BE: 
+  - Lưu những thông tin cần thiết và chi tiết của stage đó
+  - Thông tin lưu ở mỗi stage là khác nhau
+  - Lưu dưới dạng JSON
+- Đối với trên contract:
+  - Hash của stage trước đó
+  - Hash info của stage
+  - URL link để có thể lấy được JSON (lưu ở BE)
+  - Chữ ký signature (metamask) xác nhận các thông tin đã lưu ở trên
+    - Từ chữ ký có thể xác định account đã dùng để ký
+    - Xác nhận xem account đã ký và cung cấp thông tin có đúng trong tổ chức đã được thiết lập trong LC và đồng thời là tổ chức cần xác nhận thông tin ở một stage cụ thể. Ví dụ: Stage 2.1 yêu cầu AdvisingBank - Bank A sẽ cung cấp chứng từ và xác nhận thông tin -> chỉ cho phép Account thuộc tổ chức Bank A được quyền đưa thông tin lên LC
+    - Bảo đảm nội dung đưa lên và nội dung đã được ký là trùng khớp
+    - Account đã dùng để ký xác nhận thông tin và người gửi thông tin lên contract cần phải giống nhau
+
+Lưu ý:
+- Chỉ cần nội dung thông tin đưa lên contract bị thay đổi không khớp với nội dung đã được ký -> Fail
+- Người ký xác nhận thông tin và người đưa thông tin lên LC không trùng khớp -> Fail
+- Về Account đã dùng để ký và đưa lên on-chain không lưu một các trực tiếp, nhưng thông qua chữ ký có thể xác định được Account đã dùng để ký
+
+```solidity
+struct StageInfo {
+  bytes32 prevHash;
+  bytes32 contentHash;
+  string url;
+  bytes signature;
+}
+```
+
+### Integrity
+- Khi đưa thông tin xác nhận on-chain, Stage cần ở trạng thái `unset`
+- Không cho phép update thông tin của một Stage sau khi đã thiết lập. Nếu có, request sẽ tự động bị reject -> fail
+- Tất cả các request đưa thông tin xác nhận lên on-chain cần theo sequence order
+  - Stage 1 <- Stage 2.1 <- Stage 3.1 .....
+  - Không cho skip stage 1.2 <- 2.1 <- 4.1
+  - Stage 1 chỉ có duy nhất một sub-stage (Stage 1.1)
+  - Không cho phép skip sub-stage (Stage 2.2 có trước Stage 2.1)
+  - Không cho phép confirm chéo sub-stage (2.1 <- 3.2; 2.2 <- 3.1)
+- Stage Info: `prevHash`, `contentHash`, `url`, `signature`
+  - `stage_hash = hash(prevHash, contentHash, url, signature)`
+  - `prevHash` trong Stage 2.1 sẽ là `stage_hash` của Stage 1.1
+  - `prevHash` của Stage 1.1 là gì?
+- Trong LC Contract sẽ lưu `stage_hash -> stage_number`. Do đó, sẽ dễ dàng checking thông tin `prevHash` đưa lên ở một Stage bất kỳ có liên kết với Stage trước đó hay không
+
+<p align="center">
+  <img width="800" height="400" src="./images/Stages.png">
+</p>
+
+### Đưa thông tin approval của Stage lên LC Contract
+
+<p align="center">
+  <img width="400" height="400" src="./images/Approve.png">
+</p>
+
+- Khi `Standard LC Contract` hoặc `UPAS LC Contract` được tạo ra, request này sẽ đi kèm với `documentId`. Đây cũng chính là `prevHash` của Stage 1.1
+- Theo như design ban đầu, `documentId` được tạo ra từ hash của thông tin hợp đồng giữa Applicant - Beneficiary. Thông tin này sẽ được lưu trên một contract on-chain. Scope này đã bị cắt bỏ
+- `Standard LC Factory` và `UPAS LC Factory` sẽ lưu một mapping `documentId -> address_of_lc_contract`
+- User khi approve và đưa thông tin cập nhật lên LC Contract sẽ cần cung cấp:
+  - documentId
+  - stage + sub-stage
+  - prevHash
+  - contentHash
+  - url
+  - signature
+- Sau đó, `Router Service` sẽ có nhiệm vụ look-up LC Contract tương ứng với `documentId` thông qua việc liên lạc với 2 Factory contract để trả về address của LC Contract
+  - Nếu như không tìm thấy address -> Fail (vì documentId không tồn tại)
+  - Nếu có -> thông tin sẽ được chuyển sang LC Contract để giải quyết
+- LC Contract có nhiệm vụ kiểm tra về thông tin cũng như là kiểm tra quyền gửi thông tin approve của account người gửi. 
+  - Nếu người gửi và tất cả thông tin là hợp lệ thì sẽ lưu vào contract
+  - Ngược lại -> Fail
