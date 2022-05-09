@@ -146,7 +146,7 @@ struct StageInfo {
   <img width="800" height="400" src="./images/Stages.png">
 </p>
 
-### Đưa thông tin approval của Stage lên LC Contract
+### Đưa thông tin lên LC Contract
 
 <p align="center">
   <img width="400" height="400" src="./images/Approve.png">
@@ -168,3 +168,15 @@ struct StageInfo {
 - LC Contract có nhiệm vụ kiểm tra về thông tin cũng như là kiểm tra quyền gửi thông tin approve của account người gửi. 
   - Nếu người gửi và tất cả thông tin là hợp lệ thì sẽ lưu vào contract
   - Ngược lại -> Fail
+
+## Những issue trong phiên bản draft hiện tại
+
+1. Smart contract/blockchain là nơi lưu trữ để đối chứng nhưng lại thiếu minh bạch trong vấn đề xác nhận và xác thực
+- `Standard LC Contract` hay `UPAS LC Contract` liên quan đến các bên tham gia trong một bản hợp đồng và thanh toán: Doanh nghiệp/Cá nhân - Doanh Nghiệp/Cá nhân - Ngân hàng. Theo như thiết kế tương tác hiện tại thì chỉ có tổ chức ngân hàng là tương tác với LC Contract cho việc xác nhận và đồng thuận (confirm and approve). Thông tin đưa lên contract đều đươc thực hiện bởi một cá nhân/tổ chức nhưng lại không có sự xác thực ở đối tượng liên quan chính của một hợp đồng (Applicant/Beneficiary)
+- LC Contract được tạo ra khi Ngân hàng đồng thuận cung cấp tín dụng cho vay cho một Doanh Nghiệp/Cá nhân dựa trên hợp đồng mua bán giữa Applicant và Beneficiary. Như thiết kế ban đầu thì hợp đồng giữa Applicant và Beneficiary sẽ được đưa lên smart contract để lưu thông tin. Khi Ngân hàng xác nhận và đồng thuận sẽ tạo LC Contract và liên kết với hợp đồng này. Tuy nhiên, vì đơn giản thiết kế ở thời điểm hiện tại và hạn chế việc tương tác của các Doanh nghiệp/Cá nhân với hệ thống, bước đưa hợp đồng lên smart contract đã bị cắt bỏ. Việc cắt bỏ này vi phạm nghiêm trọng đến những quy tắc trong blockchain - authenticity và integrity
+2. Time constraint
+- Mỗi hợp đồng đều có những thông tin: Ngày soạn thảo và Ngày hết hiệu lực. Đối với smart contract cũng sẽ có cơ chế tương tự. Thời điểm smart contract có hiệu lực thông thường được mặc định là thời điểm smart contract được tạo ra. Tuy nhiên, thời gian hiệu lực của LC Contract là hoàn toàn không có giới hạn. Dẫn đến, những thông tin lưu trữ ở trên LC Contract có thể được đưa lên không giới hạn -> vấn đề về time constraint
+3. Tính pháp lý
+- Văn bản truyền thống thường dựa trên chữ ký và con dấu để xác nhận thông tin và được pháp luật bảo vệ. Tuy nhiên, điều này lại không thể áp dụng trong blockchain được
+- Thay vào đó, smart contract/blockchain dựa trên thuật toán để giải quyết vấn đề chữ ký xác nhận và xác thực. Điều này về mặt pháp lý thì vẫn chưa có được sự chấp nhận
+- Do đó, nên kết hợp cả hai để có thể minh bạch và rõ ràng. Ở một số bước, Doanh nghiệp/cá nhân cần vào xác nhận thông tin đã được đưa lên bởi Ngân hàng
