@@ -12,3 +12,11 @@ Ngày 10/5/2022
 - em Ngọc hẹn lịch thứ 6 demo rpc server với FIS - không cần hẹn buisness
 - 2 anh Toàn, Phi review list blocker & đề xuất, hỗ trợ em Ngọc lên danh sách công việc  & kế hoạch làm việc với FIS
 - anh Dũng đã phản hồi - resolve blocker hôm trước 
+
+Ngày 11/5/2022
+- anh Toàn tạo task cho 9 methods của RPC, chỉ viết happy case bỏ qua validation - thứ 6 deadline để demo
+- review lỗi import json phần core - chỉ warning, tạm bỏ qua
+- UI của demo bao gồm: import - tạo params - push lên blockchain - thông báo kết quả (simple) - chậm nhất sáng thứ 2 
+- 2 anh Mạnh integrate với smart contract - chưa gọi từ core packages => thử gọi từ core packages trong L/C - trong hôm nay
+- indexing đã xong - tạm dừng vì chưa liên quan đến demo
+- anh Toàn anh Phi review planning - feed lại thông tin cho Ngọc các đầu công việc cần thiết và yêu cầu với FIS - mai họp thống nhất planning. 
