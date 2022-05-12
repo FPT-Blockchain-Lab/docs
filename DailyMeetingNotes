@@ -20,3 +20,8 @@ Ngày 11/5/2022
 - 2 anh Mạnh integrate với smart contract - chưa gọi từ core packages => thử gọi từ core packages trong L/C - trong hôm nay
 - indexing đã xong - tạm dừng vì chưa liên quan đến demo
 - anh Toàn anh Phi review planning - feed lại thông tin cho Ngọc các đầu công việc cần thiết và yêu cầu với FIS - mai họp thống nhất planning. 
+
+Ngày 12/5/2022
+- đã hoàn thành core packages
+- viết các methods của RPC server - deadline trước 3h chiều ngày mai
+- anh Thuật chốt planning với em Ngọc
