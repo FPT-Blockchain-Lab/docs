@@ -25,3 +25,12 @@ Ngày 12/5/2022
 - đã hoàn thành core packages
 - viết các methods của RPC server - deadline trước 3h chiều ngày mai
 - anh Thuật chốt planning với em Ngọc
+
+Ngày 16/5/2022	
+- Demo đã chuẩn bị xong
+- Chiều 3h30 biweekly meeting - sprint này anh Thuật đã chuẩn bị và check report, từ các sprint sau em Ngọc thực hiện
+- Họp planning sprint tới: 
++ Tìm hiểu lại sự cố network
++ Performance test: tìm hiểu cấu hình node và khả năng chịu tải của 1 node và toàn network
++ Tạo monitor cho hệ thống
++ Thống nhất APIs và plan làm việc cùng FIS
