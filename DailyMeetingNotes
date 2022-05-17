@@ -34,3 +34,9 @@ Ngày 16/5/2022
 + Performance test: tìm hiểu cấu hình node và khả năng chịu tải của 1 node và toàn network
 + Tạo monitor cho hệ thống
 + Thống nhất APIs và plan làm việc cùng FIS
+
+Ngày 17/5/2022
+- Sửa lại RPC middleware (hash input -> raw input; key module?)
+- Chuẩn bị hoàn thiện demo
+- Review list of suggestions và comment từ FIS -> đề xuất ý kiến cho buổi họp chiều nay nếu có
+- Fix bug network hôm trước (node ko gen block mới)
