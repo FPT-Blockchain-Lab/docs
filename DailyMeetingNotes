@@ -1,0 +1,42 @@
+Ngày 9/5/2022
+- Anh Phi và anh Toàn tiếp tục thảo luận lựa chọn JSON-RPC
+- 2 anh Mạnh đã deploy thành công permission contract
+- Em Ngọc thảo luận tiếp với anh Quang để đưa ra các pending tasks
+- <anh Dũng (dev team FIS) chưa phản hồi document hướng dẫn deploy server của FIS>
+- em Ngọc sẽ chịu trách nhiệm take note daily meetings & tổng hợp các blocker để theo dõi và báo cáo
+
+Ngày 10/5/2022
+- 2 anh Mạnh update lại lc middle-ware theo smart contract mới cập nhật
+- 2 anh Mạnh deploy & test permission contract
+- 2 anh Mạnh tạo UI get RPC bám sát BRD
+- em Ngọc hẹn lịch thứ 6 demo rpc server với FIS - không cần hẹn buisness
+- 2 anh Toàn, Phi review list blocker & đề xuất, hỗ trợ em Ngọc lên danh sách công việc  & kế hoạch làm việc với FIS
+- anh Dũng đã phản hồi - resolve blocker hôm trước 
+
+Ngày 11/5/2022
+- anh Toàn tạo task cho 9 methods của RPC, chỉ viết happy case bỏ qua validation - thứ 6 deadline để demo
+- review lỗi import json phần core - chỉ warning, tạm bỏ qua
+- UI của demo bao gồm: import - tạo params - push lên blockchain - thông báo kết quả (simple) - chậm nhất sáng thứ 2 
+- 2 anh Mạnh integrate với smart contract - chưa gọi từ core packages => thử gọi từ core packages trong L/C - trong hôm nay
+- indexing đã xong - tạm dừng vì chưa liên quan đến demo
+- anh Toàn anh Phi review planning - feed lại thông tin cho Ngọc các đầu công việc cần thiết và yêu cầu với FIS - mai họp thống nhất planning. 
+
+Ngày 12/5/2022
+- đã hoàn thành core packages
+- viết các methods của RPC server - deadline trước 3h chiều ngày mai
+- anh Thuật chốt planning với em Ngọc
+
+Ngày 16/5/2022	
+- Demo đã chuẩn bị xong
+- Chiều 3h30 biweekly meeting - sprint này anh Thuật đã chuẩn bị và check report, từ các sprint sau em Ngọc thực hiện
+- Họp planning sprint tới: 
++ Tìm hiểu lại sự cố network
++ Performance test: tìm hiểu cấu hình node và khả năng chịu tải của 1 node và toàn network
++ Tạo monitor cho hệ thống
++ Thống nhất APIs và plan làm việc cùng FIS
+
+Ngày 17/5/2022
+- Sửa lại RPC middleware (hash input -> raw input; key module?)
+- Chuẩn bị hoàn thiện demo
+- Review list of suggestions và comment từ FIS -> đề xuất ý kiến cho buổi họp chiều nay nếu có
+- Fix bug network hôm trước (node ko gen block mới)
