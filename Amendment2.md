@@ -23,4 +23,11 @@ Trường hợp tu chỉnh này sẽ **bắt buộc** phải có sự đồng ý
 
 Trường hợp tu chỉnh này sẽ **không cần** có sự đồng ý của tất cả các bên tham gia (2 ngân hàng hoặc 3 ngân hàng)
 
-??? Làm thế nào để ghi nhận là thay đổi về luồng cũ 
+#### Sau khi tu chỉnh, sẽ có một khoảng thời gian để xem xét hủy tu chỉnh, nếu hủy tu chỉnh xảy ra, các substages mới chạy về luồng cũ 
+- Bước 1.2 vẫn được ghi nhận onchain nhưng root của luồng quay trở về 1.1
+-
+ <p align="center">
+  <img width="100%" height="auto" src="./images/HTC1.drawio.png">
+</p>
+
+#### Việc generate state hash được thực hiện theo logic như hình 
