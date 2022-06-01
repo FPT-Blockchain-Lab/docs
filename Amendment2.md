@@ -25,7 +25,7 @@ Trường hợp tu chỉnh này sẽ **không cần** có sự đồng ý của 
 
 #### Sau khi tu chỉnh, sẽ có một khoảng thời gian để xem xét hủy tu chỉnh, nếu hủy tu chỉnh xảy ra, các substages mới chạy về luồng cũ 
 - Bước 1.2 vẫn được ghi nhận onchain nhưng root của luồng quay trở về 1.1
--
+
  <p align="center">
   <img width="100%" height="auto" src="./images/HTC1.drawio.png">
 </p>
