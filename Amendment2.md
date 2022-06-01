@@ -21,4 +21,6 @@ Trường hợp tu chỉnh này sẽ **bắt buộc** phải có sự đồng ý
   <img width="100%" height="auto" src="./images/TC1.png">
 </p>
 
-Trường hợp tu chỉnh này sẽ **không cần** có sự đồng ý của tất cả các bên tham gia (2 ngân hàng hoặc 3 ngân hàng, ko có beneficiary và applicant)
+Trường hợp tu chỉnh này sẽ **không cần** có sự đồng ý của tất cả các bên tham gia (2 ngân hàng hoặc 3 ngân hàng)
+
+??? Làm thế nào để ghi nhận là thay đổi về luồng cũ 
