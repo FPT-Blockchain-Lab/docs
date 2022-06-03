@@ -31,8 +31,6 @@ Note: The `Status` column can be set for values similar to "Pass", "Fail", "N/A"
 | **WSTG-ATHZ**     | **Authorization Testing**                                                  |        |       |
 | WSTG-ATHZ-02      | Testing for Bypassing Authorization Schema                                 |        |       |
 | WSTG-ATHZ-03      | Testing for Privilege Escalation                                           |        |       |
-| **WSTG-SESS**     | **Session Management Testing**                                             |        |       |                                            
-| WSTG-SESS-10      | Testing JSON Web Tokens                                                    |        |       |                                      
 | **WSTG-ERRH**     | **Error Handling**                                                         |        |       |
 | WSTG-ERRH-01      | Testing for Improper Error Handling                                        |        |       |
 | WSTG-ERRH-02      | Testing for Stack Traces                                                   |        |       |
@@ -47,10 +45,10 @@ Note: The `Status` column can be set for values similar to "Pass", "Fail", "N/A"
 | **WSTG-APIT**     | **API Testing**                                                            |        |       |
 | WSTG-APIT-01      | Testing GraphQL                                                            |        |       |
 | **WSTG-CRYP**     | **Cryptography**                                                           |        |       |
-| WSTG-CRYP-01      | Testing for Weak Transport Layer Security                                  |        |       |
+| WSTG-CRYP-01      | Testing for Weak Transport Layer Security                                  |    Pass    |       |
 | WSTG-CRYP-02      | Testing for Padding Oracle                                                 |        |       |
 | WSTG-CRYP-03      | Testing for Sensitive Information Sent Via Unencrypted Channels            |        |       |
-| WSTG-CRYP-04      | Testing for Weak Encryption                                                |        |       |
+| WSTG-CRYP-04      | Testing for Weak Encryption                                                |     Pass   |        |
 | **WSTG-KEYT**     | **Keystore Testing**                                                       |        |       |
-| WSTG-KEYT-01      | Testing for Brute  Force Attack                                            |        |       |
-| WSTG-KEYT-01      | Testing for Side-channel Attack                                            |        |       |
+| WSTG-KEYT-01      | Testing for Brute  Force Attack                                            |    Pass    |  Hệ thống sử dụng AES-128 Encryption là một trong những tiêu chuẩn mã hóa được tổ chức NIST và IBM khuyên dùng, ngoài ra AES-128 chưa từng ghi nhận một cuộc tấn công nào thành công bằng phương pháp Brute Force Attack      |
+| WSTG-KEYT-01      | Testing for Side-channel Attack                                            |    Pass    | Trong lịch sử đã AES-128 đã từng ghi nhận một cuộc tấn công bằng phương pháp Side-channel Attack thành công tuy nhiên đó là ở version cũ, còn với version mới chưa ghi nhận một cuộc tấn công nào thành công      |
