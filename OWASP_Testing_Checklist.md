@@ -18,16 +18,16 @@ Note: The `Status` column can be set for values similar to "Pass", "Fail", "N/A"
 | WSTG-CONF-11      | Test Cloud Storage                                                         |        |       |
 | WSTG-CONF-12      | Testing for Content Security Policy                                        |        |       |
 | **WSTG-IDNT**     | **Identity Management Testing**                                            |        |       |
-| WSTG-IDNT-01      | Test Role Definitions                                                      |        |       |
-| WSTG-IDNT-02      | Test User Registration Process                                             |        |       |
-| WSTG-IDNT-03      | Test Account Provisioning Process                                          |        |       |
+| WSTG-IDNT-01      | Test Role Definitions                                                      |  Pass    |  Manual test     |
+| WSTG-IDNT-02      | Test User Registration Process                                             |  Pass    |  Manual test     |
+| WSTG-IDNT-03      | Test Account Provisioning Process                                          |  Pass    |  Manual test     |
 | **WSTG-ATHN**     | **Authentication Testing**                                                 |        |       |
-| WSTG-ATHN-01      | Testing for Credentials Transported over an Encrypted Channel              |        |       |
-| WSTG-ATHN-02      | Testing for Default Credentials                                            |        |       |
-| WSTG-ATHN-03      | Testing for Weak Lock Out Mechanism                                        |        |       |
-| WSTG-ATHN-04      | Testing for Bypassing Authentication Schema                                |        |       |
-| WSTG-ATHN-05      | Testing for Vulnerable Remember Password                                   |        |       |
-| WSTG-ATHN-07      | Testing for Weak Password Policy                                           |        |       |
+| WSTG-ATHN-01      | Testing for Credentials Transported over an Encrypted Channel              |  Pass    | https://github.com/ConsenSys/quorum/blob/master/permission/permission_test.go |
+| WSTG-ATHN-02      | Testing for Default Credentials                                            |  Pass    |  https://github.com/ConsenSys/quorum/blob/master/permission/permission_test.go     |
+| WSTG-ATHN-03      | Testing for Weak Lock Out Mechanism                                        |  Pass    |  https://github.com/ConsenSys/quorum/blob/master/permission/permission_test.go     |
+| WSTG-ATHN-04      | Testing for Bypassing Authentication Schema                                |  Pass    |  https://github.com/ConsenSys/quorum/blob/master/permission/permission_test.go     |
+| WSTG-ATHN-05      | Testing for Vulnerable Remember Password                                   |  Pass    |  https://github.com/ConsenSys/quorum/blob/master/permission/permission_test.go     |
+| WSTG-ATHN-06      | Testing for Weak Password Policy                                           |  Pass    |  https://github.com/ConsenSys/quorum/blob/master/permission/permission_test.go     |
 | **WSTG-ATHZ**     | **Authorization Testing**                                                  |        |       |
 | WSTG-ATHZ-02      | Testing for Bypassing Authorization Schema                                 |        |       |
 | WSTG-ATHZ-03      | Testing for Privilege Escalation                                           |        |       |
@@ -43,12 +43,11 @@ Note: The `Status` column can be set for values similar to "Pass", "Fail", "N/A"
 | WSTG-BUSL-06      | Testing for the Circumvention of Work Flows                                |        |       |
 | WSTG-BUSL-07      | Test Defenses Against Application Misuse                                   |        |  ddos |                                                                      
 | **WSTG-APIT**     | **API Testing**                                                            |        |       |
-| WSTG-APIT-01      | Testing GraphQL                                                            |        |       |
+| WSTG-APIT-01      | Testing GraphQL                                                            |  Pass  |Manual test|
 | **WSTG-CRYP**     | **Cryptography**                                                           |        |       |
-| WSTG-CRYP-01      | Testing for Weak Transport Layer Security                                  |    Pass    |       |
-| WSTG-CRYP-02      | Testing for Padding Oracle                                                 |        |       |
-| WSTG-CRYP-03      | Testing for Sensitive Information Sent Via Unencrypted Channels            |        |       |
-| WSTG-CRYP-04      | Testing for Weak Encryption                                                |     Pass   |        |
+| WSTG-CRYP-01      | Testing for Weak Transport Layer Security                                  |  Pass  |       |
+| WSTG-CRYP-02      | Testing for Padding Oracle                                                 |  Pass  | Padding Oracle là một phương pháp tấn công gần giống với Brute Force attack và tương tự AES-128 chưa ghi nhận cuộc tấn công thành công nào trong lịch sử|
+| WSTG-CRYP-04      | Testing for Weak Encryption                                                |  Pass  |  Hệ thống sử dụng AES-128 Encryption là một trong những tiêu chuẩn mã hóa được tổ chức NIST và IBM khuyên dùng nên đảm bảo độ mạnh của encryption      |
 | **WSTG-KEYT**     | **Keystore Testing**                                                       |        |       |
-| WSTG-KEYT-01      | Testing for Brute  Force Attack                                            |    Pass    |  Hệ thống sử dụng AES-128 Encryption là một trong những tiêu chuẩn mã hóa được tổ chức NIST và IBM khuyên dùng, ngoài ra AES-128 chưa từng ghi nhận một cuộc tấn công nào thành công bằng phương pháp Brute Force Attack      |
-| WSTG-KEYT-01      | Testing for Side-channel Attack                                            |    Pass    | Trong lịch sử đã AES-128 đã từng ghi nhận một cuộc tấn công bằng phương pháp Side-channel Attack thành công tuy nhiên đó là ở version cũ, còn với version mới chưa ghi nhận một cuộc tấn công nào thành công      |
+| WSTG-KEYT-01      | Testing for Brute  Force Attack                                            |  Pass  |  Hệ thống sử dụng AES-128 Encryption là một trong những tiêu chuẩn mã hóa được tổ chức NIST và IBM khuyên dùng, ngoài ra AES-128 chưa từng ghi nhận một cuộc tấn công nào thành công bằng phương pháp Brute Force Attack      |
+| WSTG-KEYT-02      | Testing for Side-channel Attack                                            |  Pass  | Trong lịch sử đã AES-128 đã từng ghi nhận một cuộc tấn công bằng phương pháp Side-channel Attack thành công tuy nhiên đó là ở version cũ, còn với version mới chưa ghi nhận một cuộc tấn công nào thành công      |
