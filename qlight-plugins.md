@@ -4,17 +4,22 @@
 - Xử lí public transactions trực tiếp sau đó proxy vào server
 - Không có tác động đến consensus
 - Phương án bảo mật
-    + TLS
-    + CIDR masks - https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+    + [TLS](https://www.cloudflare.com/en-gb/learning/ssl/transport-layer-security-tls)
+    + [CIDR masks](https://datatracker.ietf.org/doc/html/rfc1519)
     + File Base Permissioned (tương tự whitelist IP, nhưng dành cho p2p node - node hex)
-    + Client security plugin https://github.com/ConsenSys/quorum-security-plugin-enterprise
-        * Dùng Qlight Token Manager plugin dựa trên gRPC (https://github.com/ConsenSys/quorum-plugin-qlight-token-manager)
+    + Client security [plugin](https://github.com/ConsenSys/quorum-security-plugin-enterprise)
+        * Dùng Qlight Token Manager plugin dựa trên [gRPC](https://github.com/ConsenSys/quorum-plugin-qlight-token-manager)
+        * 2 token management mechanism là JWK và OAuth2
 
 2. Đánh giá Manage Keys
-- Sử dụng file-based keystore management, keystore https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition
-- Sử dụng account plugin https://consensys.net/docs/goquorum/en/21.10.0/develop/manage-keys/account-plugins/
-    + Account plugin với backend impl là hashicorp vault: https://github.com/ConsenSys/quorum-account-plugin-hashicorp-vault
-- Sử dụng clef, là recommendation method for signing https://github.com/ConsenSys/quorum/tree/master/cmd/clef
+- Sử dụng file-based keystore management, [keystore](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition)
+- Sử dụng [account plugin](https://consensys.net/docs/goquorum/en/21.10.0/develop/manage-keys/account-plugins/)
+    + Account plugin với backend [impl](https://github.com/ConsenSys/quorum-account-plugin-hashicorp-vault) là hashicorp vault: 
+- Sử dụng [clef](https://github.com/ConsenSys/quorum/tree/master/cmd/clef), là recommendation method for end user signing
+- Có 2 cách storage keys
+    - Dùng file
+    - Dùng vault
+- Có 1 dapp signature UI trong clef
 
 3. Recommandation for architecture
 - Centralized wallet can used key managements với account plugin, và vault backend. Lí do:
@@ -39,6 +44,7 @@
 
 5. References:
 
+- https://www.cloudflare.com/en-gb/learning/ssl/transport-layer-security-tls/
 - https://consensys.net/docs/goquorum/en/latest/develop/manage-keys/
 - https://consensys.net/docs/goquorum/en/latest/develop/manage-keys/account-plugins/
 - https://www.vaultproject.io/docs/internals/security
