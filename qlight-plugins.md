@@ -30,12 +30,18 @@
 - Pros:
     + Support tốt vấn đề performance và DDOS protection
     + Support tốt seperations of concern consensus và rpc handling
-
+    + Support tốt cho những vấn đề bảo mật trọng yếu
+        + Hashicorp Vault là enterprised product 
+        + JWK + OAuth2 cũng là những tiêu chuẩn hàng đầu ở trong ngành
 - Cons:
     + Efforts bỏ ra là autogen abi từ smart contracts + viết hash lại functions
     + Viết bằng golang + gRPC (so với cũ typescript/javascript + jsonRPC)
 
 5. References:
 
-- https://consensys.net/docs/goquorum//en/latest/develop/manage-keys/
-- https://consensys.net/docs/goquorum//en/latest/develop/manage-keys/account-plugins/
+- https://consensys.net/docs/goquorum/en/latest/develop/manage-keys/
+- https://consensys.net/docs/goquorum/en/latest/develop/manage-keys/account-plugins/
+- https://www.vaultproject.io/docs/internals/security
+- https://www.vaultproject.io/docs/internals/rotation
+- https://datatracker.ietf.org/doc/html/rfc6749
+- https://datatracker.ietf.org/doc/html/rfc7517
