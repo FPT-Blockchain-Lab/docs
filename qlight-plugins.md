@@ -28,7 +28,7 @@
     + Có thể dể dàng đưa ra deployments và security implementation
 
 - Dùng Qlight như là RPC Node, với authorization dùng client security plugin
-    + Write plugin to support LC protocols (thay đổi namespace trong RPC method)
+    + Write plugin to support LC protocols (thay đổi namespace trong RPC method) (Estimate vào khoảng 3 ngày viết lại rpc methods)
     + Đã có sẵn OAuth2 và JWK supports
 
 4. Pros and Cons
