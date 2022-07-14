@@ -123,7 +123,9 @@ Interface_or_Backend <- Middleware : return detail content của stage cần tra
 @enduml
 ```
 
-4. Tu chinh LC sequence
+4. Amend LC
+
+```
    @startuml
    interface_or_backend -> middleware: gửi lên params và yêu cầu tu chỉnh LC
    middleware -> AMC: gọi router để thực hiện tu chỉnh LC
@@ -138,3 +140,45 @@ Interface_or_Backend <- Middleware : return detail content của stage cần tra
    AmendRequest -> middleware: thông báo thành công và trả về thông tin LC sau khi tu chỉnh
    middleware -> interface_or_backend: thông báo thành công và trả về thông tin LC sau khi tu chỉnh
    @enduml
+```
+
+State diagram
+
+```
+@startuml
+[*] --> AMC
+AMC --> RouterService : get stage content
+AMC : routerAddress
+RouterService : stage
+RouterService : subStage
+RouterService : documentID
+
+
+RouterService --> StandardLC : tu chỉnh LC
+RouterService --> UpasLC : tu chỉnh LC
+StandardLC:  _caller,
+StandardLC:  _stage,
+StandardLC:  _subStage,
+StandardLC:  _content
+
+UpasLC:  _caller,
+UpasLC:  _stage,
+UpasLC:  _subStage,
+UpasLC:  _content
+
+StandardLC --> update_root_stage
+UpasLC --> update_root_stage
+update_root_stage --> 1.1
+1.1 : rootHash
+1.1 --> 1.2
+1.2 : rootHash change
+
+StandardLC --> update_sub_stage
+UpasLC --> update_sub_stage
+update_sub_stage : _content change
+update_sub_stage -> 1.1.x
+1.1.x: _content 1.1
+1.1.x -> 1.2.x
+1.2.x: _content 1.2
+@enduml
+```
