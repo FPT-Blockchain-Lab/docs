@@ -122,3 +122,19 @@ Middleware <- StandardLC_or_UPASLC : return detail content của stage cần tra
 Interface_or_Backend <- Middleware : return detail content của stage cần tra cứu
 @enduml
 ```
+
+4. Tu chinh LC sequence
+   @startuml
+   interface_or_backend -> middleware: gửi lên params và yêu cầu tu chỉnh LC
+   middleware -> AMC: gọi router để thực hiện tu chỉnh LC
+   AMC -> router: getStageContent()
+   router -> standardLC_or_upasLC: getRootHash()
+   router -> middleware: return error nếu không tìm thấy roothash tương ứng với documentId
+   middleware -> interface_or_backend: return error
+   router -> standardLC_or_upasLC: thực hiện tu chỉnh LC
+   standardLC_or_upasLC -> AmendRequest: fullfillAmendment()
+   AmendRequest -> AmendRequest: approve()
+   AmendRequest -> AmendRequest: submit()
+   AmendRequest -> middleware: thông báo thành công và trả về thông tin LC sau khi tu chỉnh
+   middleware -> interface_or_backend: thông báo thành công và trả về thông tin LC sau khi tu chỉnh
+   @enduml
