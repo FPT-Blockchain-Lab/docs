@@ -78,7 +78,7 @@ jobs:
       - name: Static HTML export with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
       - name: Create .nojekyll file
-        run: touch ${{ github.workspace }}/out/.nojekyll
+        run: touch ${{ github.workspace }}/out/.nojekyll && gh-pages -d dist -t true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:

@@ -10,6 +10,11 @@ const config: DocsThemeConfig = {
     text: "FPT Blockchain Lab",
   },
   darkMode: false,
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s – FPT Blockchain Lab",
+    };
+  },
 };
 
 export default config;
