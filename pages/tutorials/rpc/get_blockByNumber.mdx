@@ -1,0 +1,154 @@
+# eth_getBlockByNumber RPC Method
+
+Returns information of the block matching the given block number.
+
+import { Tabs } from "nextra/components";
+
+<Tabs items={["curl", "python", "javascript"]}>
+  <Tabs.Tab>
+    ```
+    curl https://docs-demo.quiknode.pro/ \
+    -X POST \
+    -H "Content-Type: application/json" \
+    --data '{"method":"eth_getBlockByNumber","params":["0xc5043f",false],"id":1,"jsonrpc":"2.0"}'
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```
+    import requests
+    import json
+
+    url = "https://docs-demo.quiknode.pro/"
+
+    payload = json.dumps({
+        "method": "eth_getBlockByNumber",
+        "params": [
+            "0xc5043f",
+            False
+        ],
+        "id": 1,
+        "jsonrpc": "2.0"
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "method": "eth_getBlockByNumber",
+        "params": [
+            "0xc5043f",
+            false
+        ],
+        "id": 1,
+        "jsonrpc": "2.0"
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch("https://docs-demo.quiknode.pro/", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    ```
+
+</Tabs.Tab>
+</Tabs>
+
+## Parameters
+
+**blockNumber** string _REQUIRED_
+
+The block number in hexadecimal format or the string latest, earliest, pending, safe or finalized
+
+**transaction_detail_flag** _REQUIRED_
+
+The method returns the full transaction objects when this value is true otherwise, it returns only the hashes of the transactions
+
+## Returns
+
+**object**
+
+A block object, or null when no block was found. The block object contains the following fields:
+
+> **baseFeePerGas**
+> A string of the base fee encoded in hexadecimal format. Please note that this response field will not be included in a block requested before the EIP-1559 upgrade
+>
+> **difficulty**
+> The integer of the difficulty for this block encoded as a hexadecimal
+> **extraData**
+> The “extra data” field of this block
+>
+> **gasLimit**
+> The maximum gas allowed in this block encoded as a hexadecimal
+>
+> **gasUsed**
+> The total used gas by all transactions in this block encoded as a hexadecimal
+>
+> **hash**
+> The block hash of the requested block. null if pending
+>
+> **logsBloom**
+> The bloom filter for the logs of the block. null if pending
+>
+> **miner**
+> The address of the beneficiary to whom the mining rewards were given
+>
+> **mixHash**
+> A string of a 256-bit hash encoded as a hexadecimal
+>
+> **nonce**
+> The hash of the generated proof-of-work. null if pending
+>
+> **number**
+> The block number of the requested block encoded as hexadecimal. null if pending
+>
+> **parentHash**
+> The hash of the parent block
+>
+> **receiptsRoot**
+> The root of the receipts trie of the block
+>
+> **sha3Uncles**
+> The SHA3 of the uncles data in the block
+>
+> **size**
+> The size of this block in bytes as an Integer value encoded as hexadecimal
+>
+> **stateRoot**
+> The root of the final state trie of the block
+>
+> **timestamp**
+> The UNIX timestamp for when the block was collated
+>
+> **totalDifficulty**
+> The integer of the total difficulty of the chain until this block encoded as a hexadecimal
+>
+> **transactions**
+> An array of transaction objects - please see eth_getTransactionByHash for exact shape
+>
+> **transactionsRoot**
+> The root of the transaction trie of the block
+>
+> **uncles**
+> An array of uncle hashes
+
+```
+
+```
