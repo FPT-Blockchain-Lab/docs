@@ -1,0 +1,59 @@
+# Installation
+
+import { Tabs } from "nextra/components";
+
+<Tabs items={["gradle", "maven", "sbt"]}>
+  <Tabs.Tab>
+    - **Step 1**. Add the JitPack repository to your build file
+    ```
+    dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+			mavenCentral()
+			maven { url 'https://jitpack.io' }
+		}
+	}
+    ```
+    - **Step 2**. Add the dependency
+
+    ```
+    dependencies {
+        implementation 'com.github.FPT-Blockchain-Lab:quorum-middleware:Tag'
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    - **Step 1**. Add the JitPack repository to your build file
+    ```
+    <repositories>
+      <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+      </repository>
+    </repositories>
+    ```
+    - **Step 2**. Add the dependency
+
+    ```
+    <dependency>
+        <groupId>com.github.FPT-Blockchain-Lab</groupId>
+        <artifactId>quorum-middleware</artifactId>
+        <version>0.5.0</version>
+    </dependency>
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    - **Step 1**. Add the JitPack repository to your build file
+    ```
+    resolvers += "jitpack" at "https://jitpack.io"
+    ```
+    - **Step 2**. Add the dependency
+
+    ```
+    libraryDependencies += "com.github.FPT-Blockchain-Lab" % "quorum-middleware" % "Tag"
+    ```
+
+  </Tabs.Tab>
+</Tabs>

@@ -1,0 +1,21 @@
+{
+  "index": {
+    "title": "Home",
+    "type": "page",
+    "display": "hidden"
+  },
+  "builders": {
+    "title": "Builders",
+    "type": "page"
+  },
+  "tutorials": {
+    "title": "Tutorials",
+    "type": "page"
+  },
+  "explorer": {
+    "title": "Explorer",
+    "type": "page",
+    "href": "https://etherscan.io/",
+    "newWindow": true
+  }
+}
