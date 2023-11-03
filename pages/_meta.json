@@ -1,21 +1,7 @@
 {
-  "index": {
-    "title": "Home",
-    "type": "page",
-    "display": "hidden"
-  },
-  "builders": {
-    "title": "Builders",
-    "type": "page"
-  },
-  "tutorials": {
-    "title": "Tutorials",
-    "type": "page"
-  },
-  "explorer": {
-    "title": "Explorer",
-    "type": "page",
-    "href": "https://etherscan.io/",
-    "newWindow": true
-  }
+  "index": "Introduction",
+  "get-started": "Get Started",
+  "node-operators": "Node Operators",
+  "middleware-sdk": "Middleware/SDK",
+  "smart-contracts": "Smart Contracts"
 }

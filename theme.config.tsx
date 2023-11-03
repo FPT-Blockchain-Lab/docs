@@ -2,14 +2,18 @@ import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
 
 const config: DocsThemeConfig = {
-  logo: <span>FPT Blockchain Lab</span>,
+  logo: <strong>FPT Blockchain Lab</strong>,
   project: {
     link: "https://github.com/FPT-Blockchain-Lab",
   },
   footer: {
-    text: "FPT Blockchain Lab",
+    text: "Powered By FPT Blockchain Lab",
   },
-  darkMode: false,
+  docsRepositoryBase: "https://github.com/FPT-Blockchain-Lab/docs/tree/main",
+  editLink: {
+    text: "Edit this page on GitHub",
+  },
+  darkMode: true,
   useNextSeoProps() {
     return {
       titleTemplate: "%s – FPT Blockchain Lab",
