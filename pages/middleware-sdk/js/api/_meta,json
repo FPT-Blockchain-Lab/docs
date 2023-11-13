@@ -1,5 +1,11 @@
 {
   "createstandard": "Create Standard LC",
   "createupas": "Create Upas LC",
-  "approve": "Approve LC"
+  "approve": "Approve LC",
+  "closelc": "Close LC",
+  "submitamend": "Submit Amendment",
+  "approveamend": "Approve Amendment",
+  "fulfillamend": "Fulfill Amendment",
+  "assignaccount": "Assign Account Role",
+  "updateaccount": "Update Account Status"
 }
