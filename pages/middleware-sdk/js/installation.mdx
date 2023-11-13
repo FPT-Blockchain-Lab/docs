@@ -1,0 +1,83 @@
+import Link from "next/link";
+
+# Getting Started With Quorum Middleware
+
+## Installation
+
+There are few options on how to install Quorum Middleware into your project:
+
+```sh npm2yarn
+npm i quorum-middleware
+```
+
+## Add Quorum Middleware To Your project
+
+Now, we need to add Quorum Middleware to our app:
+
+```js
+import Web3 from "web3";
+import {
+  LC,
+  LCWrapper,
+  Permission,
+  PermissionWrapper,
+} from "quorum-middleware";
+```
+
+## Initialize Quorum Middleware
+
+Finally, we need to initialize Quorum Middleware in JS. You can initialize Quorum Middleware by using default config or custom config:
+
+### Default config
+
+```js
+const web3 = new Web3("http://localhost:8545");
+const lc = new LC(web3);
+const lcWrapper = new LCWrapper(web3);
+const permission = new Permission(web3);
+const permissionWrapper = new PermissionWrapper(web3);
+```
+
+### Custom config
+
+```js
+const web3 = new Web3("http://localhost:8545");
+
+// Replace contract address to example address
+// 0x0000000000000000000000000000000000000000 -> example address
+const customConfig = {
+  lCContractAddresses: {
+    LCManagement: "0x0000000000000000000000000000000000000000",
+    Mode: "0x0000000000000000000000000000000000000000",
+    RouterService: "0x0000000000000000000000000000000000000000",
+    StandardLCFactory: "0x0000000000000000000000000000000000000000",
+    UPASLCFactory: "0x0000000000000000000000000000000000000000",
+    AmendRequest: "0x0000000000000000000000000000000000000000",
+  },
+  permissionContractAddresses: {
+    OrgManager: "0x0000000000000000000000000000000000000000",
+    AccountManager: "0x0000000000000000000000000000000000000000",
+    PermissionsImplementation: "0x0000000000000000000000000000000000000000",
+    PermissionsInterface: "0x0000000000000000000000000000000000000000",
+    PermissionsUpgradable: "0x0000000000000000000000000000000000000000",
+    NodeManager: "0x0000000000000000000000000000000000000000",
+    RoleManager: "0x0000000000000000000000000000000000000000",
+    VoterManager: "0x0000000000000000000000000000000000000000",
+  },
+  chainId: 6788,
+  chainName: "FPT Quorum Testnet FIS Gateway",
+  url: "http://localhost:8545",
+};
+
+const lc = new LC(web3, customConfig);
+const lcWrapper = new LCWrapper(web3, customConfig);
+const permission = new Permission(web3, customConfig);
+const permissionWrapper = new PermissionWrapper(web3, customConfig);
+```
+
+## What next?
+
+As you see it is really easy to integrate Quorum Middleware into your website or app. So here are your next steps:
+
+- Go to <Link style={{ color: '#008AE6'}} href="/middleware-sdk/js/api">API Documentation</Link> to learn more about all Swiper API and how to control it.
+- Look at available <Link style={{ color: '#008AE6'}} href="https://github.com/FPT-Blockchain-Lab/quorum-middleware/tree/main/example/ui">Demos</Link>.

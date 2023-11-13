@@ -1,0 +1,19 @@
+# createStandardLC
+
+The `createStandardLC` is used to create standard LC and returns transaction receipt.
+
+## LCWrapper.createStandardLC(parties, content, from)
+
+- `parties`: _string[]_ - an array of organizations
+- `content`: _object_
+  | Name | Type |
+  |----------------------|----------|
+  | prevHash | string |
+  | contentHash | string[] |
+  | url | string |
+  | signedTime | BN |
+  | numOfDocuments | _number_ |
+  | acknowledgeSignature | string |
+- `from`: _string_ - account send transaction
+
+Return transaction receipt

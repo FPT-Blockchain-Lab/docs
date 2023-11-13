@@ -1,0 +1,18 @@
+# Update Account Status
+
+The `updateAccountStatus` is used to update account status and returns transaction receipt.
+
+## PermissionWrapper.updateAccountStatus(orgId, account, action, from)
+
+- `orgId`: _string_ - unique id of the organization to which the account belongs
+- `account`: _string_ - account id
+- `action`: _number_
+  | Value | Description |
+  |-------|--------------------------------------------|
+  | 1 | for suspending the account |
+  | 2 | for activating the suspended account |
+  | 3 | for denylisting (blacklisting) the account |
+
+- `from`: _string_ - account send transaction
+
+Return transaction receipt
