@@ -1,0 +1,16 @@
+### Blockchain Explorer
+
+#### Blockscout
+
+Blockscout serves as a blockchain explorer and utilizes a subchart of PostgreSQL. The default configuration for this subchart is specified in the `helm/charts/blockscout/values.yaml` under the PostgreSQL section.
+
+To set up Blockscout for use with GoQuorum, follow these steps:
+
+1. **Updating Helm Dependencies**:
+   Update the Helm dependencies for Blockscout to ensure all necessary components are in sync.
+
+
+2. **Deploying Blockscout**:
+    Deploy the Blockscout chart to the designated namespace (`quorum`) and specify the values file tailored for GoQuorum.
+
+This process sets up Blockscout as a blockchain explorer in your Quorum environment, leveraging PostgreSQL as its underlying database.
