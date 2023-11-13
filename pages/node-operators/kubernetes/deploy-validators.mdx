@@ -1,0 +1,57 @@
+### Deploy Validators
+
+Deploying validators in a Quorum network is crucial for maintaining the network's integrity and consensus. The process involves setting up multiple validator nodes. In this example, seven validator nodes are being deployed. This number is chosen to ensure a robust and distributed consensus mechanism, enhancing the network's fault tolerance and security.
+
+Each validator node plays a role in validating transactions and blocks. Having seven nodes helps in achieving a distributed consensus, preventing any single point of failure and ensuring that no single validator has control over the entire network.
+
+Deploy the genesis block first to initialize the network:
+
+```
+helm install genesis fpt-blc-lab/goquorum-genesis --namespace quorum --create-namespace --values ./values/genesis-goquorum.yml --wait-for-jobs
+```
+
+
+Then, deploy each validator node. Each node is assigned a unique port number to operate on, ensuring they can communicate without interference:
+
+1. Validator 1:
+
+```
+helm upgrade --install validator-1 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31101
+```
+
+
+2. Validator 2:
+
+```
+helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31102
+```
+
+3. Validator 3:
+
+```
+helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31103
+```
+
+4. Validator 4:
+
+```
+helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31104
+```
+
+5. Validator 5:
+
+```
+helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31105
+```
+
+6. Validator 6:
+
+```
+helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31106
+```
+
+7. Validator 7:
+
+```
+helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31107
+```
