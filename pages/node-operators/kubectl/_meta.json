@@ -1,6 +1,6 @@
 {
-  "helm-chart": "Helm Chart",
-  "deploy-validators": "Deploy Validators",
-  "enhanced-permissions": "Enhanced Permissions",
-  "blockchain-explorer": "Blockchain Explorer"
+  "helmchart": "Helm Chart",
+  "deployvalidators": "Deploy Validators",
+  "enhancedpermissions": "Enhanced Permissions",
+  "blockchainexplorer": "Blockchain Explorer"
 }
