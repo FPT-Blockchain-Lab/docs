@@ -1,5 +1,4 @@
 {
   "kubectl": "Kubernetes",
-  "docker": "Docker",
-  "binary": "Binary"
+  "docker": "Docker"
 }
