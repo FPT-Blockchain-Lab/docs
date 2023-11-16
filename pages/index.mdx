@@ -1,1 +1,75 @@
+import Link from "next/link";
+
 # Introduction
+
+## About Consensys GoQuorum
+
+Quorum is an open-source protocol layer that provides developers with the configurable projects needed to make blockchain applications successful.
+With Quorum, you have access to all the necessary components to take a blockchain solution from concept to production.
+
+GoQuorum is a fork of [go-ethereum](https://github.com/ethereum/go-ethereum) and is updated in line with go-ethereum releases.
+
+Key enhancements over go-ethereum:
+
+- [Privacy](https://docs.goquorum.consensys.net/concepts/privacy/privacy/) - GoQuorum supports private transactions and private contracts through public/private state separation, and utilises peer-to-peer encrypted message exchanges (see [Tessera](https://github.com/consensys/tessera)) for directed transfer of private data to network participants
+  GoQuorum includes the following changes to geth:
+- [Alternative Consensus Mechanisms](https://docs.goquorum.consensys.net/concepts/consensus/overview/) - with no need for POW/POS in a permissioned network, GoQuorum instead offers multiple consensus mechanisms that are more appropriate for consortium chains:
+
+  - [QBFT](https://docs.goquorum.consensys.net/configure-and-manage/configure/consensus-protocols/qbft) - Improved version of IBFT that is interoperable with Hyperledger Besu
+  - [Istanbul BFT](https://docs.goquorum.consensys.net/configure-and-manage/configure/consensus-protocols/ibft) - a PBFT-inspired consensus algorithm with transaction finality, by AMIS.
+  - [Clique POA Consensus](https://github.com/ethereum/EIPs/issues/225) - a default POA consensus algorithm bundled with Go Ethereum.
+  - [Raft-based Consensus](https://docs.goquorum.consensys.net/configure-and-manage/configure/consensus-protocols/raft/) - a consensus model for faster blocktimes, transaction finality, and on-demand block creation
+
+### Architecture
+
+![Quorum Architecture](public/assets/quorum-architecture.png)
+The above diagram is very high-level overview of component architecture used by GoQuorum. For more in-depth discussion of the components and how they interact, please refer to [lifecycle of a private transaction](https://docs.goquorum.consensys.net/concepts/privacy/private-transaction-lifecycle/).
+
+**Reference from [GoQuorum](https://docs.goquorum.consensys.net/)**
+
+## About Enterprise Ethereum Alliance (EEA)
+
+The EEA is a global community of blockchain leaders, adopters, innovators, developers and businesses. We’re accelerating business Ethereum through professional and commercial support, advocacy and research, standards development and ecosystem trust services.
+
+Key Takeaways:
+
+- The Enterprise Ethereum Alliance (EEA) "...is a member-led industry organization whose objective is to drive the use of Ethereum blockchain technology as an open standard to empower enterprises."
+- The EEA's mission is to deliver an open, standards-based architecture and specification to accelerate the adoption of Enterprise Ethereum.
+- The EEA provides its members a community and access to educational material and various technical and media resources.
+
+### How the Enterprise Ethereum Alliance (EEA) Works
+
+The alliance aims to build, promote, and support Ethereum blockchain technology best practices, standards, and a reference architecture capable of handling real-world applications and usage.
+
+Launched in 2015, Ethereum is a blockchain-based, decentralized software platform that enables smart contracts and Distributed Applications (dApps) to be built and run without downtime, fraud, control, or interference from a third party.
+
+Ethereum is not just a platform but also a Turing complete programming language running on a blockchain that helps developers build and publish distributed applications.
+
+**Reference from [Enterprise Ethereum Alliance (EEA)](https://entethalliance.org/)**
+
+## FPT Blockchain Lab
+
+## FPT Blockchain Quorum
+
+[FPT Blockchain Quorum](https://github.com/FPT-Blockchain-Lab/quorum#fpt-blockchain-quorum-is-an-ethereum-based-blockchain-fork-from-goquorum) is an Ethereum-based blockchain fork from GoQuorum.
+
+Difference between FPT Blockchain Quorum and GoQuorum:
+
+- Block time: 1 second
+- Use empty block period feature to reduce storage usage
+- Using QBFT consensus
+- Pre-config networks for FPT Blockchain
+- Default up to Berlin hardfork
+- Default node type is all archive nodes (gcmode=archive syncmode=full)
+
+### Official Docker Containers
+
+The official docker containers can be found under https://hub.docker.com/u/fptblockchainbot
+
+### License
+
+The go-ethereum library (i.e. all code outside of the cmd directory) is licensed under the [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html), also included in our repository in the COPYING.LESSER file.
+
+The go-ethereum binaries (i.e. all code inside of the cmd directory) is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html), also included in our repository in the COPYING file.
+
+Any project planning to use the crypto/secp256k1 sub-module must use the specific [secp256k1 standalone library](https://github.com/ConsenSys/goquorum-crypto-secp256k1) licensed under 3-clause BSD.
