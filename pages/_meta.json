@@ -2,6 +2,6 @@
   "index": "Introduction",
   "get-started": "Get Started",
   "node-operators": "Node Operators",
-  "middleware-sdk": "Middleware/SDK",
-  "smart-contracts": "Smart Contracts"
+  "smart-contracts": "Smart Contracts",
+  "middleware-sdk": "Middleware/SDK"
 }

@@ -37,21 +37,3 @@ helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum 
 ```
 helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31104
 ```
-
-5. Validator 5:
-
-```
-helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31105
-```
-
-6. Validator 6:
-
-```
-helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31106
-```
-
-7. Validator 7:
-
-```
-helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set node.goquorum.p2p.nodePort=31107
-```

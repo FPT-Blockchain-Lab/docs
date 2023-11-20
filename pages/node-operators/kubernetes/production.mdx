@@ -1,0 +1,68 @@
+## Prerequisites
+
+- Clone the [Helm-chart](https://github.com/FPT-Blockchain-Lab/helm-charts) repository
+- A running Kubernetes cluster
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Helm3](https://helm.sh/docs/intro/install/)
+
+## Overview
+
+To get things ready for production, use the same charts and set the values in the `cluster` map as seen in the [Deploy](#deploy-the-network) section.
+
+## Deploy
+
+### Check that you can connect to the cluster with `kubectl`
+
+Once you have a Kubernetes cluster verify `kubectl` is connected to cluster with:
+
+```bash
+kubectl version
+Client Version: version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.1", GitCommit:"86ec240af8cbd1b60bcc4c03c20da9b98005b92e", GitTreeState:"clean", BuildDate:"2021-12-16T11:41:01Z", GoVersion:"go1.17.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"22", GitVersion:"v1.22.3", GitCommit:"c92036820499fedefec0f847e2054d824aea6cd1", GitTreeState:"clean", BuildDate:"2021-10-27T18:35:25Z", GoVersion:"go1.16.9", Compiler:"gc", Platform:"linux/amd64"}
+```
+
+## Helm Charts Repo Usage
+
+To utilize the Helm charts, [Helm](https://helm.sh) must first be installed. Refer to Helm's [documentation](https://helm.sh/docs) for installation guidelines.
+
+### Adding the Repository
+Once Helm is set up, add the repository with the following command:
+    ```
+    helm repo add fpt-blc-lab https://fpt-blockchain-lab.github.io/helm-charts
+    ```
+
+### Updating the Repository
+If you have previously added this repo, update it to get the latest package versions:
+    helm repo update
+You can then view the available charts with:
+    ```
+    helm search repo fpt-blc-lab
+    ```
+
+### Installing a Chart
+To install a specific chart, use:
+    ```
+    helm install my-<chart-name> fpt-blc-lab/<chart-name>
+    ```
+
+### Uninstalling a Chart
+To remove an installed chart, execute:
+    ```
+    helm delete my-<chart-name>
+    ```
+    
+### Deploy the network
+
+For the rest of this tutorial we use Helm charts. After you have cloned the [Helm-chart](https://github.com/FPT-Blockchain-Lab/helm-charts) repository, change the directory to `helm` for the rest of this tutorial.
+
+
+Each helm chart that you can use has the following keys and you need to set them.
+## Best practices
+
+The most important thing is to plan your network out on paper first and then test it in a Dev cluster to make sure connectivity works with your applications and you get the required throughput in transactions per second (TPS). We also recommend you test the entire process, from provisioning infrastructure to updating nodes on a Dev cluster, prior to launching your production network.
+
+By default, the cloud Kubernetes clusters should take care of availability and do multi-zones within a region. The scheduler also ensures that deployments are spread out across zones. Where possible, we recommend you use multiple bootnodes and static nodes to speed up peering.
+
+Connecting to APIs and services outside the cluster should work as normal, but connecting into your network (such as adding an on-premise node to the network) may require more configuration. Please check the [limitations](../kubernetes-index.md#limitations) and use CNI where possible. To connect an external node to your cluster, the easiest way is to use a VPN as seen in the following [multi-cluster](#multi-cluster-support) setup.
+
+Finally, we recommend setting up monitoring and alerting from the beginning so you can get early warnings of issues rather than after failure. We have a monitoring chart which uses Grafana and you can use it in conjunction with Alertmanager to create alerts or alternatively alert via Cloudwatch or Azure Monitoring.

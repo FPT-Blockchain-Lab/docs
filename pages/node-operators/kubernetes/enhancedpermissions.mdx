@@ -32,9 +32,6 @@ The deployment of the enhanced permission contract in Quorum involves two main s
     helm upgrade --install validator-2 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set quorumFlags.permissioned=true --set quorumFlags.enhancedPermissioned=true
     helm upgrade --install validator-3 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set quorumFlags.permissioned=true --set quorumFlags.enhancedPermissioned=true
     helm upgrade --install validator-4 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set quorumFlags.permissioned=true --set quorumFlags.enhancedPermissioned=true
-    helm upgrade --install validator-5 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set quorumFlags.permissioned=true --set quorumFlags.enhancedPermissioned=true
-    helm upgrade --install validator-6 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set quorumFlags.permissioned=true --set quorumFlags.enhancedPermissioned=true
-    helm upgrade --install validator-7 fpt-blc-lab/goquorum-node --namespace quorum --values ./values/goquorum-validator.yml --set quorumFlags.permissioned=true --set quorumFlags.enhancedPermissioned=true
     ```
 
 This procedure ensures that the Quorum network is configured with the necessary permission settings, enhancing its security and compliance with organizational policies.

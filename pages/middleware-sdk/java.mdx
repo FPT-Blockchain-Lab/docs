@@ -2,27 +2,9 @@
 
 import { Tabs } from "nextra/components";
 
-<Tabs items={["gradle", "maven", "sbt"]}>
-  <Tabs.Tab>
-    - **Step 1**. Add the JitPack repository to your build file
-    ```
-    dependencyResolutionManagement {
-		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-		repositories {
-			mavenCentral()
-			maven { url 'https://jitpack.io' }
-		}
-	}
-    ```
-    - **Step 2**. Add the dependency
+The library built on top of web3j and web3j-quorum. It provides a middleware to interact with Quorum network.
 
-    ```
-    dependencies {
-        implementation 'com.github.FPT-Blockchain-Lab:quorum-middleware:Tag'
-    }
-    ```
-
-  </Tabs.Tab>
+<Tabs items={["maven", "gradle"]}>
   <Tabs.Tab>
     - **Step 1**. Add the JitPack repository to your build file
     ```
@@ -47,12 +29,20 @@ import { Tabs } from "nextra/components";
   <Tabs.Tab>
     - **Step 1**. Add the JitPack repository to your build file
     ```
-    resolvers += "jitpack" at "https://jitpack.io"
+    dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+			mavenCentral()
+			maven { url 'https://jitpack.io' }
+		}
+	}
     ```
     - **Step 2**. Add the dependency
 
     ```
-    libraryDependencies += "com.github.FPT-Blockchain-Lab" % "quorum-middleware" % "Tag"
+    dependencies {
+        implementation 'com.github.FPT-Blockchain-Lab:quorum-middleware:Tag'
+    }
     ```
 
   </Tabs.Tab>

@@ -1,0 +1,24 @@
+import { Callout } from "nextra/components";
+
+# Hardware Specification
+
+- For Staging and User Acceptance Testing Environment:
+  - CPU: 8 vCPUs
+  - RAM: 16 GB
+  - Disk: 120 GB
+  - Number of nodes: 1
+  - Operating System: Ubuntu, Debian
+- For Product Environment:
+  - CPU: 8 vCPUs
+  - RAM: 16 GB
+  - Disk: 120 GB
+  - Number of nodes: 3
+  - Operating System: Ubuntu, Debian
+
+<Callout type="info" emoji="ℹ️">
+  Staging, User Acceptance Testing -> run 1 node validator, 1 explorer (postgresdb)
+</Callout>
+
+<Callout type="info" emoji="ℹ️">
+  Prod -> run 4 nodes validators, 1 rpc node, 1 explorer (postgresdb)
+</Callout>

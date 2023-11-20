@@ -2,7 +2,24 @@ import Link from "next/link";
 
 # Introduction
 
-## About Consensys GoQuorum
+## FPT Blockchain Lab
+
+FPT Blockchain Lab are formed to establish in research and develop enterprise-grade blockchain networks. We are a group of blockchain experts, researchers, and developers who are passionate about blockchain technology and its potential to change the world.
+
+## FPT Blockchain Quorum
+
+[FPT Blockchain Quorum](https://github.com/FPT-Blockchain-Lab/quorum#fpt-blockchain-quorum-is-an-ethereum-based-blockchain-fork-from-goquorum) is an Ethereum-based blockchain fork from GoQuorum.
+
+Difference between FPT Blockchain Quorum and GoQuorum:
+
+- Block time: 1 second
+- Use empty block period feature to reduce storage usage
+- Using QBFT consensus
+- Pre-config networks for FPT Blockchain
+- Default up to Berlin hardfork
+- Default node type is all archive nodes (gcmode=archive syncmode=full)
+
+## About GoQuorum
 
 Quorum is an open-source protocol layer that provides developers with the configurable projects needed to make blockchain applications successful.
 With Quorum, you have access to all the necessary components to take a blockchain solution from concept to production.
@@ -46,30 +63,3 @@ Launched in 2015, Ethereum is a blockchain-based, decentralized software platfor
 Ethereum is not just a platform but also a Turing complete programming language running on a blockchain that helps developers build and publish distributed applications.
 
 **Reference from [Enterprise Ethereum Alliance (EEA)](https://entethalliance.org/)**
-
-## FPT Blockchain Lab
-
-## FPT Blockchain Quorum
-
-[FPT Blockchain Quorum](https://github.com/FPT-Blockchain-Lab/quorum#fpt-blockchain-quorum-is-an-ethereum-based-blockchain-fork-from-goquorum) is an Ethereum-based blockchain fork from GoQuorum.
-
-Difference between FPT Blockchain Quorum and GoQuorum:
-
-- Block time: 1 second
-- Use empty block period feature to reduce storage usage
-- Using QBFT consensus
-- Pre-config networks for FPT Blockchain
-- Default up to Berlin hardfork
-- Default node type is all archive nodes (gcmode=archive syncmode=full)
-
-### Official Docker Containers
-
-The official docker containers can be found under https://hub.docker.com/u/fptblockchainbot
-
-### License
-
-The go-ethereum library (i.e. all code outside of the cmd directory) is licensed under the [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html), also included in our repository in the COPYING.LESSER file.
-
-The go-ethereum binaries (i.e. all code inside of the cmd directory) is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html), also included in our repository in the COPYING file.
-
-Any project planning to use the crypto/secp256k1 sub-module must use the specific [secp256k1 standalone library](https://github.com/ConsenSys/goquorum-crypto-secp256k1) licensed under 3-clause BSD.

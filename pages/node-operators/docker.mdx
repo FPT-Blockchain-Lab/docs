@@ -1,1 +1,42 @@
 # Docker
+
+## Prerequisites
+- nodejs v10+
+- docker
+- docker-compose
+
+# Docker
+
+You can run GoQuorum using the [official docker image on Dockerhub](https://hub.docker.com/r/quorumengineering/quorum).
+
+Consensys also provide an [official Tessera docker image](https://hub.docker.com/r/quorumengineering/tessera) which can be paired with GoQuorum to handle private transactions. This pattern is used in the [Kubernetes](./kubernetes.md) manifests and Helm charts.
+
+## Pull the image
+
+After you [log into dockerhub](https://docs.docker.com/engine/reference/commandline/login/), pull the latest image as follows:
+
+```bash
+docker pull fptblockchainlab/quorum:latest
+```
+
+## Run the image
+
+To run the image, pass in the same command line arguments as you would when running the [binary](binaries.md):
+
+```bash
+docker run -d -p 8545:8545 fptblockchainlab/quorum:latest --datadir /data --http --http.addr 0.0.0.0 --http.port 8545 ...
+```
+
+# Docker Compose
+
+[Docker-compose](https://docs.docker.com/compose/) allows you to spin up many docker containers simultaneously, and allows you to quickly configure networking and volumes, and develop patterns to use.
+
+You can also use the [Kubernetes](./kubectl/helmchart) examples and charts.
+
+1. Install quorum-dev-quickstart
+```bash
+npx quorum-dev-quickstart
+```
+2. Next steps:
+- Please check https://github.com/ConsenSys/quorum-dev-quickstart for the setup with docker-compose
+- We have an example at [Middleware Repo](https://github.com/FPT-Blockchain-Lab/quorum-middleware#how-to-run-local-network-and-deploy-smart-contracts-targeted-by-quorum-middleware-wip)
